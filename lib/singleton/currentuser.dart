@@ -27,8 +27,6 @@ class CurrentUserSingleton {
     return _instance!;
   }
   static CurrentUserSingleton getCurrentUserInstance() {
-    _instance ??= CurrentUserSingleton._internal(
-        name: "", id: "", email: "", phone: "", authType: "");
     return _instance!;
   }
 

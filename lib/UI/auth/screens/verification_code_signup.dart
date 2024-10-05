@@ -6,7 +6,6 @@ import 'package:koul_network/UI/home/screens/home_screen.dart';
 import 'package:koul_network/bloc/auth_bloc/auth_bloc.dart';
 import 'package:koul_network/enums/auth_type_enum.dart';
 import 'package:koul_network/helpers/helper_functions/logout/logout_func.dart';
-import 'package:koul_network/singleton/currentuser.dart';
 
 class VcodeSignupScreen extends StatefulWidget {
   static const routeName = "VcodeSignupScreen";
@@ -301,14 +300,7 @@ class _VcodeSignupScreenState extends State<VcodeSignupScreen> {
                 child: BlocConsumer<AuthBloc, AuthState>(
                   listener: (context, state) {
                     if (state is AuthHomeState) {
-                      print("USER ID :${state.userId}");
-                      print("Token  :${state.authToken}");
-                      print("before THE IF");
-
-                      if (CurrentUserSingleton.getCurrentUserInstance()
-                          .id
-                          .isEmpty) {
-                        print("INSIDE THE IF");
+                      if (routeScreen != "reset") {
                         context.read<AuthBloc>().add(
                               SaveUserInfoEvent(
                                   userId: state.userId,

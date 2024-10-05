@@ -117,7 +117,7 @@ class _TransactionsState extends State<Transactions> with RouteAware {
                   .where((t) => t.transactionType != "credit")
                   .toList();
 
-              return state.transactions.isEmpty
+              return state.transactions.length == 1
                   ? Center(
                       child: Text(
                         "No Transaction Done Yet!",
