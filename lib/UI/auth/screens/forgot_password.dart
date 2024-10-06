@@ -117,10 +117,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                     listener: (context, state) {
                       if (state is AuthFaliueState) {
                         // buildSnackBar(context, state.error);
-                      } else if (state is AuthSucessState) {
-                        Navigator.of(context).pushNamed(
-                            VcodeSignupScreen.routeName,
-                            arguments: {"userid": state.userId, "sn": "reset"});
+                      }
+                      if (state is AuthSucessState) {
+                        Navigator.of(context)
+                            .pushNamed(VcodeSignupScreen.routeName, arguments: {
+                          "userid": state.userId,
+                          "sn": "forgot"
+                        });
                       }
                     },
                     child: const SizedBox(),

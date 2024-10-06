@@ -80,6 +80,7 @@ class _VcodeSignupScreenState extends State<VcodeSignupScreen> {
                                           SecureSignInverifyEvent(
                                               userId: userId, vcode: inputnum));
                                     } else {
+                                      //for forgot and reset 'sn'
                                       context.read<AuthBloc>().add(
                                             ForgotVerifyEvent(
                                               userId: userId,
