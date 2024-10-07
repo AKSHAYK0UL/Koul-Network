@@ -29,7 +29,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   AuthBloc() : super(AuthInitial()) {
     on<SetStateToAuthInitialEvent>(
-        _setstatetiinitial); //set any state to AuthInitial
+        _setstatetiinitial); //set state to AuthInitial
     on<SignUpRequestEvent>(_signupRequest); //signup req
     on<SignUpverifyEvent>(_signupverify); //verify vcode
     on<SaveUserInfoEvent>(
@@ -255,6 +255,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         email: userdata.userEmail,
         phone: userdata.phone,
         authType: userdata.authType,
+        authToken: event.token,
       );
       emit(
         UserInfoState(

@@ -17,12 +17,29 @@ class UsageTab extends StatelessWidget {
       body: Column(
         children: [
           buildTiles(
-              context: context,
-              text: "AI Generated Report",
-              icon: Icons.file_copy,
-              onTap: () {
-                Navigator.of(context).pushNamed(AiReport.routeName);
-              })
+            context: context,
+            text: "Usage",
+            icon: Icons.data_usage,
+            onTap: () {
+              Navigator.of(context).pushNamed(AiReport.routeName);
+            },
+          ),
+          buildTiles(
+            context: context,
+            text: "AI Report",
+            icon: Icons.file_copy,
+            onTap: () {
+              Navigator.of(context).pushNamed(AiReport.routeName);
+            },
+          ),
+          buildTiles(
+            context: context,
+            text: "Credit Score",
+            icon: Icons.score,
+            onTap: () {
+              Navigator.of(context).pushNamed(AiReport.routeName);
+            },
+          ),
         ],
       ),
     );

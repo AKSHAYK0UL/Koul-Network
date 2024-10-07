@@ -42,13 +42,13 @@ class _AccountSettingState extends State<AccountSetting> {
             ),
           buildTiles(
             context: context,
-            text: "Update App Pin",
+            text: "Update App PIN",
             icon: Icons.key,
             onTap: () {},
           ),
           buildTiles(
             context: context,
-            text: "Update KOUL Pin",
+            text: "Update KOUL PIN",
             icon: Icons.pin,
             onTap: () {
               authenticateWithBiometrics(context, currentUser.id);

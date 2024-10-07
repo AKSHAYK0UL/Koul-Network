@@ -23,7 +23,7 @@ part 'koul_account_state.dart';
 class KoulAccountBloc extends Bloc<KoulAccountEvent, KoulAccountState> {
   //koul account
 
-  // final url = "http://10.0.2.2:8000";
+  // final url = "http://10.0.2.2:4000";
 
   final url = KOUL_SERVICE_API_URL;
 
@@ -54,10 +54,12 @@ class KoulAccountBloc extends Bloc<KoulAccountEvent, KoulAccountState> {
     try {
       final accountBalanceRoute = Uri.parse("$url/account_balance");
       print("USER ID ${currentUser.id}");
+      print("TOKEN BALACNE ${currentUser.authToken}}");
       final response = await http.post(
         accountBalanceRoute,
         headers: {
           'Content-Type': 'application/json',
+          "Authorization": currentUser.authToken,
         },
         body: json.encode(
           {
@@ -92,6 +94,7 @@ class KoulAccountBloc extends Bloc<KoulAccountEvent, KoulAccountState> {
       final payToKoulIdRoute = Uri.parse("$url/koulid_exist");
       final respone = await http.post(
         payToKoulIdRoute,
+        headers: {"Authorization": currentUser.authToken},
         body: json.encode(
           {
             "userid": currentUser.id,
@@ -132,6 +135,7 @@ class KoulAccountBloc extends Bloc<KoulAccountEvent, KoulAccountState> {
         payToKoulIdRoute,
         headers: {
           'Content-Type': 'application/json',
+          "Authorization": currentUser.authToken,
         },
         body: json.encode(
           {
@@ -180,6 +184,7 @@ class KoulAccountBloc extends Bloc<KoulAccountEvent, KoulAccountState> {
       final transactionlistRoute = Uri.parse("$url/transaction_list");
       final response = await http.post(
         transactionlistRoute,
+        headers: {"Authorization": currentUser.authToken},
         body: json.encode(
           {
             "userid": currentUser.id, //koul id
@@ -203,16 +208,17 @@ class KoulAccountBloc extends Bloc<KoulAccountEvent, KoulAccountState> {
 
   Future<void> _updateTracker(
       UpdateTrackerEvent event, Emitter<KoulAccountState> emit) async {
-    final currentUserKoulId = CurrentUserSingleton.getCurrentUserInstance().id;
+    final currentUser = CurrentUserSingleton.getCurrentUserInstance();
 
     emit(LoadingState());
     try {
       final trackerUrl = Uri.parse("$url/updatetrackers");
       final response = await http.post(
         trackerUrl,
+        headers: {"Authorization": currentUser.authToken},
         body: json.encode(
           {
-            "koul_id": currentUserKoulId,
+            "koul_id": currentUser.id,
             "low_balance_alert_is": event.lowBalanceAlertIs,
             "low_balance_amount": event.lowBalanceAmount,
             "large_expense_alert_is": event.largeExpenseAlertIs,
@@ -251,6 +257,7 @@ class KoulAccountBloc extends Bloc<KoulAccountEvent, KoulAccountState> {
       final createPinRoute = Uri.parse("$url/createtransactionpin");
       final reponse = await http.post(
         createPinRoute,
+        headers: {"Authorization": currentUser.authToken},
         body: json.encode(
           {
             "account_holder_phone": getPhone,
@@ -283,6 +290,7 @@ class KoulAccountBloc extends Bloc<KoulAccountEvent, KoulAccountState> {
       final payToPhoneNoRoute = Uri.parse("$url/paytophone");
       final response = await http.post(
         payToPhoneNoRoute,
+        headers: {"Authorization": currentUser.authToken},
         body: json.encode(
           {
             "userid": currentUser.id, //koul id
@@ -303,15 +311,16 @@ class KoulAccountBloc extends Bloc<KoulAccountEvent, KoulAccountState> {
   //Get all transaction list
   Future<void> _getAlltransactions(
       GetAllTransactionsListEvent event, Emitter<KoulAccountState> emit) async {
-    final currentUserKoulId = CurrentUserSingleton.getCurrentUserInstance().id;
+    final currentUser = CurrentUserSingleton.getCurrentUserInstance();
     emit(LoadingState());
     try {
       final getAllTransactionsRoute = Uri.parse("$url/gettransactionlist");
       final resposne = await http.post(
         getAllTransactionsRoute,
+        headers: {"Authorization": currentUser.authToken},
         body: json.encode(
           {
-            "userid": currentUserKoulId,
+            "userid": currentUser.id,
           },
         ),
       );
@@ -387,15 +396,16 @@ class KoulAccountBloc extends Bloc<KoulAccountEvent, KoulAccountState> {
   Future<void> _aiGenratedReport(
       AIGenratedReportEvent event, Emitter<KoulAccountState> emit) async {
     emit(LoadingState());
-    final currentUserKoulId = CurrentUserSingleton.getCurrentUserInstance().id;
+    final currentUser = CurrentUserSingleton.getCurrentUserInstance();
     List<dynamic> rawTransactionsData = [];
     try {
       final getAllTransactionsRoute = Uri.parse("$url/gettransactionlist");
       final resposne = await http.post(
         getAllTransactionsRoute,
+        headers: {"Authorization": currentUser.authToken},
         body: json.encode(
           {
-            "userid": currentUserKoulId,
+            "userid": currentUser.id,
           },
         ),
       );

@@ -6,6 +6,7 @@ class CurrentUserSingleton {
   late String email;
   late String phone;
   late String authType;
+  late String authToken;
 
   CurrentUserSingleton._internal({
     required this.name,
@@ -13,6 +14,7 @@ class CurrentUserSingleton {
     required this.email,
     required this.phone,
     required this.authType,
+    required this.authToken,
   });
 
   factory CurrentUserSingleton({
@@ -21,9 +23,16 @@ class CurrentUserSingleton {
     required String email,
     required String phone,
     required String authType,
+    required String authToken,
   }) {
     _instance ??= CurrentUserSingleton._internal(
-        name: name, id: id, email: email, phone: phone, authType: authType);
+      name: name,
+      id: id,
+      email: email,
+      phone: phone,
+      authType: authType,
+      authToken: authToken,
+    );
     return _instance!;
   }
   static CurrentUserSingleton getCurrentUserInstance() {
