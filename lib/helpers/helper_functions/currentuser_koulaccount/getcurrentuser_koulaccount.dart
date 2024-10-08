@@ -3,9 +3,12 @@ import 'dart:io';
 import 'package:koul_network/model/koul_account/account_balance.dart';
 import 'package:http/http.dart' as http;
 import 'package:koul_network/secrets/api.dart';
+import 'package:koul_network/singleton/currentuser.dart';
 import 'package:koul_network/singleton/currentuser_account.dart';
 
 Future<void> getCurrentuserKoulAccountDatail(String uid) async {
+  final currentUser = CurrentUserSingleton.getCurrentUserInstance();
+
   print("IN KOUL ACCOUNT");
   try {
     final url = Uri.parse("$KOUL_SERVICE_API_URL/account_balance");
@@ -13,6 +16,7 @@ Future<void> getCurrentuserKoulAccountDatail(String uid) async {
       url,
       headers: {
         'Content-Type': 'application/json',
+        "Authorization": currentUser.authToken,
       },
       body: json.encode(
         {

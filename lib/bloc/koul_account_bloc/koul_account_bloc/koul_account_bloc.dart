@@ -23,7 +23,7 @@ part 'koul_account_state.dart';
 class KoulAccountBloc extends Bloc<KoulAccountEvent, KoulAccountState> {
   //koul account
 
-  // final url = "http://10.0.2.2:4000";
+  // final url = "http://10.0.2.2:8000";
 
   final url = KOUL_SERVICE_API_URL;
 
@@ -67,7 +67,7 @@ class KoulAccountBloc extends Bloc<KoulAccountEvent, KoulAccountState> {
           },
         ),
       );
-      print(response.body.toString());
+      print("RESPONE ${response.body.toString()}");
       if (response.statusCode == HttpStatus.accepted) {
         final AccountBalance kAccount =
             AccountBalance.fromJson(jsonDecode(response.body));
