@@ -53,6 +53,12 @@ final class SignInRequestEvent extends AuthEvent {
   });
 }
 
+final class GetAppPINStatusEvent extends AuthEvent {
+  final String userid;
+  final String token;
+  GetAppPINStatusEvent({required this.userid, required this.token});
+}
+
 final class FetchUserInfoFromUserIdEvent extends AuthEvent {
   final String userid;
   final String token;
@@ -130,4 +136,9 @@ final class SecureSignInverifyEvent extends AuthEvent {
     required this.userId,
     required this.vcode,
   });
+}
+
+final class EnterAppPINEvent extends AuthEvent {
+  final String appPIN;
+  EnterAppPINEvent({required this.appPIN});
 }

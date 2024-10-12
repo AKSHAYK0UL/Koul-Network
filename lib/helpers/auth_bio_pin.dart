@@ -7,7 +7,9 @@ import 'package:local_auth/local_auth.dart';
 final LocalAuthentication auth = LocalAuthentication();
 bool _isAuthenticated = false;
 Future<void> authenticateWithBiometrics(
-    BuildContext context, String toKoulId) async {
+    {required BuildContext context,
+    required String toKoulId,
+    String route = ''}) async {
   try {
     _isAuthenticated = await auth.authenticate(
       localizedReason: 'Scan your fingerprint or Enter your lock screen pin',
@@ -17,8 +19,12 @@ Future<void> authenticateWithBiometrics(
     );
     print(_isAuthenticated);
     if (_isAuthenticated) {
-      Navigator.of(scaffoldKey.currentContext!)
-          .pushNamed(SetupTransactionPin.routeName, arguments: toKoulId);
+      if (route.isEmpty) {
+        Navigator.of(scaffoldKey.currentContext!)
+            .pushNamed(SetupTransactionPin.routeName, arguments: toKoulId);
+      } else if (route.isNotEmpty) {
+        Navigator.of(scaffoldKey.currentContext!).pushNamed(route);
+      }
       print('Successfully authenticated');
     }
   } catch (e) {

@@ -107,7 +107,8 @@ class TransactionFailedScreen extends StatelessWidget {
                     height: screenSize.height * 0.080,
                     child: TextButton.icon(
                       onPressed: () {
-                        authenticateWithBiometrics(context, toKoulId!);
+                        authenticateWithBiometrics(
+                            context: context, toKoulId: toKoulId!);
                       },
                       label: FittedBox(
                         fit: BoxFit.fill,

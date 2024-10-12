@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -18,8 +19,8 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  // final url = "http://10.0.2.2:8000";
-  final url = AUTH_ACCOUNT_API_URL;
+  final url = "http://10.0.2.2:8000";
+  //final url = AUTH_ACCOUNT_API_URL;
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: [
       'email',
@@ -34,6 +35,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignUpverifyEvent>(_signupverify); //verify vcode
     on<SaveUserInfoEvent>(
         _saveuserinfo); //save the user data on the device[userid//AuthToken]
+
+    on<GetAppPINStatusEvent>(_getAppPINstatus);
     on<FetchUserInfoFromUserIdEvent>(
         _fetchuserInfo); //fetch user info using user id and in return gets[username,useremail,userid,phone no]
     on<SignInRequestEvent>(_signinRequest); //signin req
@@ -47,6 +50,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SecureSignUpverifyEvent>(_secureSignUpVerify); //verify vcode
     on<SecureSignInEvent>(_secureSignIn);
     on<SecureSignInverifyEvent>(_secureSignInVerify);
+    on<EnterAppPINEvent>(_enterappPIN); //enter app PIN
   }
   //set state to AuthInitial
   void _setstatetiinitial(
@@ -228,6 +232,60 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
+////////////////////////////////////////////////////////////////////
+  Future<void> _getAppPINstatus(
+      GetAppPINStatusEvent event, Emitter<AuthState> emit) async {
+    emit(AuthLoadingState());
+
+    try {
+      final uexistroute = Uri.parse("$url/uexist");
+      final wakeUpKoulServiceRoute = Uri.parse("$KOUL_SERVICE_API_URL/on");
+      // final response = await http.post(uexistroute,
+      //     body: json.encode({"userid": event.userid}));
+      List<Response> response = await Future.wait([
+        http.post(uexistroute,
+            headers: {"Authorization": event.token},
+            body: json.encode({"userid": event.userid})),
+        http.get(wakeUpKoulServiceRoute),
+      ]);
+
+      final jsondata = jsonDecode(response[0].body);
+
+      final userdata = GetUserData.fromJson(jsondata);
+
+      print("FETCHING USER $jsondata");
+      print("PIN VALUE ${userdata.pinIsOnOff}");
+      CurrentUserSingleton(
+        id: userdata.userId,
+        name: userdata.userName,
+        email: userdata.userEmail,
+        phone: userdata.phone,
+        authType: userdata.authType,
+        authToken: event.token,
+        appPINstatus: userdata.pinIsOnOff,
+      );
+      if (userdata.pinIsOnOff) {
+        emit(EnterAppPINState());
+      } else {
+        emit(
+          UserInfoState(
+            userId: userdata.userId,
+            userEmail: userdata.userEmail,
+            userName: userdata.userName,
+            authType: userdata.authType,
+            phone: userdata.phone,
+            pin: userdata.pinIsOnOff,
+          ),
+        );
+      }
+    } catch (e) {
+      print("UID INAVLID ERROR ${e.toString()}");
+      emit(AuthFaliueState("Invaild UID"));
+      return;
+    }
+  }
+
+/////////////////////////////////////////////////////////////////////////////
   Future<void> _fetchuserInfo(
       FetchUserInfoFromUserIdEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoadingState());
@@ -248,7 +306,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       final userdata = GetUserData.fromJson(jsondata);
 
-      print("FETCHING USER ");
+      print("FETCHING USER $jsondata");
+      print("PIN VALUE ${userdata.pinIsOnOff}");
+
       CurrentUserSingleton(
         id: userdata.userId,
         name: userdata.userName,
@@ -256,6 +316,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         phone: userdata.phone,
         authType: userdata.authType,
         authToken: event.token,
+        appPINstatus: userdata.pinIsOnOff,
       );
       emit(
         UserInfoState(
@@ -264,6 +325,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           userName: userdata.userName,
           authType: userdata.authType,
           phone: userdata.phone,
+          pin: userdata.pinIsOnOff,
         ),
       );
     } catch (e) {
@@ -638,6 +700,39 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     } catch (e) {
       emit(AuthInvalidVcodeState(e.toString()));
       return;
+    }
+  }
+
+  Future<void> _enterappPIN(
+      EnterAppPINEvent event, Emitter<AuthState> emit) async {
+    final currentUser = CurrentUserSingleton.getCurrentUserInstance();
+
+    emit(EnterPINLoadingState());
+    final routeEnterAppPin = "$url/verifyapppin";
+    try {
+      final response = await http.post(
+        Uri.parse(routeEnterAppPin),
+        headers: {"Authorization": currentUser.authToken},
+        body: json.encode(
+          {
+            "userid": currentUser.id,
+            "app_pin": event.appPIN,
+          },
+        ),
+      );
+      if (response.statusCode == HttpStatus.ok &&
+          response.body.toString() == "done") {
+        print(response.body.toString());
+        add(FetchUserInfoFromUserIdEvent(
+            userid: currentUser.id, token: currentUser.authToken));
+        emit(VerifyAppPINSucessState());
+        return;
+      } else {
+        emit(VerifyAppPINFailureState(errorMessage: response.body.toString()));
+        return;
+      }
+    } catch (e) {
+      emit(VerifyAppPINFailureState(errorMessage: e.toString()));
     }
   }
 }

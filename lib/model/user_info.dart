@@ -41,6 +41,7 @@ class GetUserData {
   final String userName;
   final String authType;
   final String phone;
+  final bool pinIsOnOff;
 
   GetUserData({
     required this.userId,
@@ -48,6 +49,7 @@ class GetUserData {
     required this.userName,
     required this.authType,
     required this.phone,
+    required this.pinIsOnOff,
   });
   factory GetUserData.fromJson(Map<String, dynamic> json) {
     return GetUserData(
@@ -56,6 +58,7 @@ class GetUserData {
       userName: json["username"],
       authType: json["authtype"],
       phone: json["phone"],
+      pinIsOnOff: json["pin"] ?? false, // false if null or missing
     );
   }
   Map<String, String> toJson() {
@@ -65,6 +68,7 @@ class GetUserData {
       "username": userName,
       "authtype": authType,
       "phone": phone,
+      // "app_pin": pinIsOnOff,
     };
   }
 }

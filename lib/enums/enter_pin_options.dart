@@ -1,0 +1,4 @@
+enum EnterAppPINOptions {
+  forgotPIN,
+  logOut,
+}

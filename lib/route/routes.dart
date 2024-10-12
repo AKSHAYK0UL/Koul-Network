@@ -18,6 +18,7 @@ import 'package:koul_network/UI/home/cross%20screen/transaction_detail.dart';
 import 'package:koul_network/UI/home/more/screen/account_info.dart';
 import 'package:koul_network/UI/home/more/screen/account_setting.dart';
 import 'package:koul_network/UI/home/more/screen/account_setting/reset_password.dart';
+import 'package:koul_network/UI/home/more/screen/app_pin_setting/app_pin_setting.dart';
 import 'package:koul_network/UI/home/more/screen/privacy.dart';
 import 'package:koul_network/UI/home/pay_to_contacts/screen/contacts_list.dart';
 import 'package:koul_network/UI/home/pay_to_koul_id/screens/pay_koulid.dart';
@@ -27,8 +28,10 @@ import 'package:koul_network/UI/home/pay_to_koul_id/screens/previous_transaction
 import 'package:koul_network/UI/home/qr/screen/scanner.dart';
 import 'package:koul_network/UI/home/screens/home_screen.dart';
 import 'package:koul_network/UI/home/cross%20screen/screen/tranaction_done.dart';
+import 'package:koul_network/UI/home/screens/navbar_screen.dart';
 import 'package:koul_network/UI/home/screens/transactions.dart';
-import 'package:koul_network/UI/home/usage/ai_report.dart';
+import 'package:koul_network/UI/home/usage/screens/ai_report.dart';
+import 'package:koul_network/UI/home/usage/screens/usage.dart';
 
 //routes table
 Map<String, WidgetBuilder> routeTable = {
@@ -66,4 +69,7 @@ Map<String, WidgetBuilder> routeTable = {
   AccountSetting.routeName: (context) => const AccountSetting(),
   ResetPasswordScreen.routeName: (context) => const ResetPasswordScreen(),
   AiReport.routeName: (context) => const AiReport(),
+  UsageScreen.routeName: (context) => const UsageScreen(),
+  NavbarScreen.routeName: (context) => const NavbarScreen(),
+  AppPinSetting.routeName: (context) => const AppPinSetting(),
 };

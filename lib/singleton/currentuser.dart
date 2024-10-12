@@ -7,7 +7,7 @@ class CurrentUserSingleton {
   late String phone;
   late String authType;
   late String authToken;
-
+  late bool appPINstatus;
   CurrentUserSingleton._internal({
     required this.name,
     required this.id,
@@ -15,6 +15,7 @@ class CurrentUserSingleton {
     required this.phone,
     required this.authType,
     required this.authToken,
+    required this.appPINstatus,
   });
 
   factory CurrentUserSingleton({
@@ -24,6 +25,7 @@ class CurrentUserSingleton {
     required String phone,
     required String authType,
     required String authToken,
+    required bool appPINstatus,
   }) {
     _instance ??= CurrentUserSingleton._internal(
       name: name,
@@ -32,6 +34,7 @@ class CurrentUserSingleton {
       phone: phone,
       authType: authType,
       authToken: authToken,
+      appPINstatus: appPINstatus,
     );
     return _instance!;
   }

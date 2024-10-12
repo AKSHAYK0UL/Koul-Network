@@ -5,10 +5,11 @@ import 'package:koul_network/UI/home/qr/screen/scanner.dart';
 import 'package:koul_network/UI/home/screens/home.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:koul_network/UI/home/screens/transactions.dart';
-import 'package:koul_network/UI/home/usage/usage_tab.dart';
+import 'package:koul_network/UI/home/usage/screens/usage_tab.dart';
 import 'package:koul_network/bloc/koul_account_bloc/koul_account_bloc/koul_account_bloc.dart';
 
 class NavbarScreen extends StatefulWidget {
+  static const routeName = "navbarscreen";
   const NavbarScreen({super.key});
 
   @override

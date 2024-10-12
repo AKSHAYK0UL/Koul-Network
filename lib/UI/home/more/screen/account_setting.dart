@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:koul_network/UI/home/more/screen/account_setting/reset_password.dart';
+import 'package:koul_network/UI/home/more/screen/app_pin_setting/app_pin_setting.dart';
 import 'package:koul_network/UI/home/more/widget/build_tiles.dart';
 import 'package:koul_network/helpers/auth_bio_pin.dart';
 import 'package:koul_network/main.dart';
@@ -28,8 +29,7 @@ class _AccountSettingState extends State<AccountSetting> {
       ),
       body: Column(
         children: [
-          if (CurrentUserSingleton.getCurrentUserInstance().authType ==
-              "Email Auth")
+          if (currentUser.authType == "Email Auth")
             buildTiles(
               context: context,
               text: "Reset password",
@@ -42,16 +42,22 @@ class _AccountSettingState extends State<AccountSetting> {
             ),
           buildTiles(
             context: context,
-            text: "Update App PIN",
+            text: "App PIN setting",
             icon: Icons.key,
-            onTap: () {},
+            onTap: () {
+              authenticateWithBiometrics(
+                  context: context,
+                  toKoulId: currentUser.id,
+                  route: AppPinSetting.routeName);
+            },
           ),
           buildTiles(
             context: context,
             text: "Update KOUL PIN",
             icon: Icons.pin,
             onTap: () {
-              authenticateWithBiometrics(context, currentUser.id);
+              authenticateWithBiometrics(
+                  context: context, toKoulId: currentUser.id);
             },
           ),
         ],

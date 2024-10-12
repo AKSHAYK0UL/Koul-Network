@@ -46,6 +46,7 @@ final class UserInfoState extends AuthState {
   final String userName;
   final String authType;
   final String phone;
+  final bool pin;
 
   UserInfoState({
     required this.userId,
@@ -53,5 +54,17 @@ final class UserInfoState extends AuthState {
     required this.userName,
     required this.authType,
     required this.phone,
+    required this.pin,
   });
 }
+
+final class VerifyAppPINSucessState extends AuthState {}
+
+final class EnterAppPINState extends AuthState {}
+
+final class VerifyAppPINFailureState extends AuthState {
+  final String errorMessage;
+  VerifyAppPINFailureState({required this.errorMessage});
+}
+
+final class EnterPINLoadingState extends AuthState {}
