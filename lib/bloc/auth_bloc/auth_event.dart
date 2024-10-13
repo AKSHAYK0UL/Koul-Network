@@ -142,3 +142,8 @@ final class EnterAppPINEvent extends AuthEvent {
   final String appPIN;
   EnterAppPINEvent({required this.appPIN});
 }
+
+final class CreateAppPINEvent extends AuthEvent {
+  final String appPIN;
+  CreateAppPINEvent({required this.appPIN});
+}

@@ -15,10 +15,12 @@ import 'package:koul_network/UI/home/cross%20screen/screen/transaction_failed.da
 import 'package:koul_network/UI/home/cross%20screen/screen/transaction_pin.dart';
 import 'package:koul_network/UI/home/cross%20screen/screen/updating_creating_transactionpin.dart';
 import 'package:koul_network/UI/home/cross%20screen/transaction_detail.dart';
+import 'package:koul_network/UI/home/more/screen/AppPinkeypad.dart';
 import 'package:koul_network/UI/home/more/screen/account_info.dart';
 import 'package:koul_network/UI/home/more/screen/account_setting.dart';
 import 'package:koul_network/UI/home/more/screen/account_setting/reset_password.dart';
 import 'package:koul_network/UI/home/more/screen/app_pin_setting/app_pin_setting.dart';
+import 'package:koul_network/UI/home/more/screen/app_pin_setting/processing/loading.dart';
 import 'package:koul_network/UI/home/more/screen/privacy.dart';
 import 'package:koul_network/UI/home/pay_to_contacts/screen/contacts_list.dart';
 import 'package:koul_network/UI/home/pay_to_koul_id/screens/pay_koulid.dart';
@@ -72,4 +74,6 @@ Map<String, WidgetBuilder> routeTable = {
   UsageScreen.routeName: (context) => const UsageScreen(),
   NavbarScreen.routeName: (context) => const NavbarScreen(),
   AppPinSetting.routeName: (context) => const AppPinSetting(),
+  AppPINKeypad.routeName: (context) => const AppPINKeypad(),
+  Loading.routeName: (context) => const Loading(),
 };

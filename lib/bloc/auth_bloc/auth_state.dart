@@ -68,3 +68,10 @@ final class VerifyAppPINFailureState extends AuthState {
 }
 
 final class EnterPINLoadingState extends AuthState {}
+
+final class AppPINCreatedState extends AuthState {}
+
+final class AppPINCreationFailedState extends AuthState {
+  final String error;
+  AppPINCreationFailedState({required this.error});
+}

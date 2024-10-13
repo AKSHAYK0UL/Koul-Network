@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:koul_network/UI/home/cross%20screen/screen/updating_creating_transactionpin.dart';
 import 'package:koul_network/bloc/koul_account_bloc/koul_account_bloc/koul_account_bloc.dart';
-import 'package:koul_network/model/koul_account/koulid.dart';
-import 'package:koul_network/singleton/currentuser.dart';
 
 class SetupTransactionPin extends StatefulWidget {
   static const routeName = "SetupTransactionPin";

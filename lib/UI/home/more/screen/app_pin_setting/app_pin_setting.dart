@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:koul_network/UI/home/more/screen/AppPinkeypad.dart';
 import 'package:koul_network/UI/home/more/widget/build_tiles.dart';
+import 'package:koul_network/enums/app_pin_settting.dart';
 import 'package:koul_network/singleton/currentuser.dart';
 
 class AppPinSetting extends StatelessWidget {
@@ -25,7 +27,12 @@ class AppPinSetting extends StatelessWidget {
               context: context,
               text: "Create App PIN",
               icon: Icons.pin,
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed(
+                  AppPINKeypad.routeName,
+                  arguments: AppPINSettingRoute.create,
+                );
+              },
             ),
           if (currentUser.appPINstatus)
             buildTiles(

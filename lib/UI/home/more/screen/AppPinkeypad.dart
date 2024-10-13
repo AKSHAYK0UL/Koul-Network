@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:koul_network/UI/home/more/screen/more_tab.dart';
-import 'package:koul_network/UI/home/screens/navbar_screen.dart';
+import 'package:koul_network/UI/home/more/screen/app_pin_setting/processing/loading.dart';
 import 'package:koul_network/bloc/auth_bloc/auth_bloc.dart';
-import 'package:koul_network/enums/enter_pin_options.dart';
-import 'package:koul_network/singleton/currentuser.dart';
+import 'package:koul_network/enums/app_pin_settting.dart';
 
-class EnterAppPIN extends StatefulWidget {
-  const EnterAppPIN({super.key});
+class AppPINKeypad extends StatefulWidget {
+  static const routeName = "AppPINKeypad";
+  const AppPINKeypad({super.key});
 
   @override
-  State<EnterAppPIN> createState() => _EnterAppPINState();
+  State<AppPINKeypad> createState() => _AppPINKeypadState();
 }
 
-class _EnterAppPINState extends State<EnterAppPIN> {
+class _AppPINKeypadState extends State<AppPINKeypad> {
   String inputnum = "";
   bool valid = true;
-  Widget keyPad({
-    required String num,
-    required Size screenSize,
-  }) {
+  Widget keyPad(
+      {required String num,
+      required Size screenSize,
+      required AppPINSettingRoute route}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 7),
       child: Material(
@@ -55,10 +54,11 @@ class _EnterAppPINState extends State<EnterAppPIN> {
                           setState(
                             () {
                               if (inputnum.length == 4) {
-                                //verify PIN
-                                context
-                                    .read<AuthBloc>()
-                                    .add(EnterAppPINEvent(appPIN: inputnum));
+                                if (route == AppPINSettingRoute.create) {
+                                  context
+                                      .read<AuthBloc>()
+                                      .add(CreateAppPINEvent(appPIN: inputnum));
+                                } else {}
                               }
                               if (inputnum.length < 4) {
                                 valid = false;
@@ -175,7 +175,8 @@ class _EnterAppPINState extends State<EnterAppPIN> {
 
   @override
   Widget build(BuildContext context) {
-    final currentuser = CurrentUserSingleton.getCurrentUserInstance();
+    AppPINSettingRoute routeData =
+        ModalRoute.of(context)!.settings.arguments as AppPINSettingRoute;
     final screenSize = MediaQuery.sizeOf(context);
     return Scaffold(
       backgroundColor: Colors.grey.shade900,
@@ -183,41 +184,13 @@ class _EnterAppPINState extends State<EnterAppPIN> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: PopupMenuButton(
-                color: Theme.of(context).canvasColor,
-                icon: const Icon(
-                  Icons.more_vert,
-                  color: Colors.white,
-                  size: 30,
-                ),
-                itemBuilder: (context) => [
-                  PopupMenuItem(
-                    value: EnterAppPINOptions.forgotPIN,
-                    child: Text(
-                      "Forgot PIN?",
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                  ),
-                  PopupMenuItem(
-                    value: EnterAppPINOptions.logOut,
-                    child: Text(
-                      "LogOut",
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                  ),
-                ],
-                onSelected: (EnterAppPINOptions opValue) {
-                  if (opValue == EnterAppPINOptions.forgotPIN) {
-                  } else {
-                    showDialogOnLogOut(context);
-                  }
-                },
-              ),
+            SizedBox(
+              height: screenSize.height * 0.040,
             ),
             Text(
-              "Enter App PIN",
+              routeData == AppPINSettingRoute.create
+                  ? "Create a 4-digit PIN"
+                  : "Update a 4-digit PIN",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: screenSize.height * 0.029,
@@ -225,14 +198,7 @@ class _EnterAppPINState extends State<EnterAppPIN> {
               ),
             ),
             SizedBox(
-              height: screenSize.height * 0.010,
-            ),
-            Text(
-              currentuser.email,
-              style: Theme.of(context).textTheme.displayMedium,
-            ),
-            SizedBox(
-              height: screenSize.height * 0.080,
+              height: screenSize.height * 0.100,
             ),
             Wrap(
               crossAxisAlignment: WrapCrossAlignment.center,
@@ -274,45 +240,27 @@ class _EnterAppPINState extends State<EnterAppPIN> {
             ),
             SizedBox(
               height: screenSize.height * 0.05,
-              child: BlocBuilder<AuthBloc, AuthState>(
-                builder: (context, state) {
-                  if (state is UserInfoState) {
-                    return const NavbarScreen();
-                  }
+              child: BlocListener<AuthBloc, AuthState>(
+                listener: (context, state) {
                   if (state is EnterPINLoadingState) {
-                    return const Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.amber,
-                      ),
-                    );
+                    Navigator.of(context).pushNamed(Loading.routeName);
                   }
-
-                  if (!valid) {
-                    return Text(
-                      "Enter a 4-digit PIN",
-                      style: TextStyle(
-                        color: Colors.orange,
-                        fontSize: screenSize.height * 0.027,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    );
-                  }
-                  if (state is VerifyAppPINFailureState) {
-                    return Text(
-                      "Incorrect PIN",
-                      style: TextStyle(
-                        color: Colors.orange,
-                        fontSize: screenSize.height * 0.027,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    );
-                  }
-                  return const SizedBox();
                 },
+                child: SizedBox(
+                    child: !valid
+                        ? Text(
+                            "Enter a 4-digit PIN",
+                            style: TextStyle(
+                              color: Colors.orange,
+                              fontSize: screenSize.height * 0.027,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          )
+                        : null),
               ),
             ),
             SizedBox(
-              height: screenSize.height * 0.105,
+              height: screenSize.height * 0.145,
             ),
             Wrap(
               children: [
@@ -322,9 +270,9 @@ class _EnterAppPINState extends State<EnterAppPIN> {
                     height: screenSize.height * 0.11,
                     child: SizedBox(
                         child: keyPad(
-                      num: keynum,
-                      screenSize: screenSize,
-                    )),
+                            num: keynum,
+                            screenSize: screenSize,
+                            route: routeData)),
                   ),
                 ),
               ],
