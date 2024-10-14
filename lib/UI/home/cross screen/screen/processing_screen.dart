@@ -18,7 +18,8 @@ class _ProcessingScreenState extends State<ProcessingScreen> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.sizeOf(context);
     final toKoulId = ModalRoute.of(context)!.settings.arguments as String;
-    return WillPopScope(
+    return PopScope(
+      canPop: false,
       child: Scaffold(
         body: BlocListener<KoulAccountBloc, KoulAccountState>(
           listener: (context, state) {
@@ -78,7 +79,7 @@ class _ProcessingScreenState extends State<ProcessingScreen> {
           ),
         ),
       ),
-      onWillPop: () async => false,
+      // onWillPop: () async => false,
     );
   }
 }

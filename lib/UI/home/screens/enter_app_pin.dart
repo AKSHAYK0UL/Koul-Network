@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:koul_network/UI/home/more/screen/AppPinkeypad.dart';
 import 'package:koul_network/UI/home/more/screen/more_tab.dart';
 import 'package:koul_network/UI/home/screens/navbar_screen.dart';
 import 'package:koul_network/bloc/auth_bloc/auth_bloc.dart';
 import 'package:koul_network/enums/enter_pin_options.dart';
+import 'package:koul_network/helpers/auth_bio_pin.dart';
 import 'package:koul_network/singleton/currentuser.dart';
 
 class EnterAppPIN extends StatefulWidget {
@@ -203,13 +205,17 @@ class _EnterAppPINState extends State<EnterAppPIN> {
                   PopupMenuItem(
                     value: EnterAppPINOptions.logOut,
                     child: Text(
-                      "LogOut",
+                      "Logout?",
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
                 ],
                 onSelected: (EnterAppPINOptions opValue) {
                   if (opValue == EnterAppPINOptions.forgotPIN) {
+                    authenticateWithBiometrics(
+                        context: context,
+                        toKoulId: currentuser.id,
+                        route: AppPINKeypad.routeName);
                   } else {
                     showDialogOnLogOut(context);
                   }

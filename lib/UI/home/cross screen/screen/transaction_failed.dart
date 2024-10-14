@@ -19,7 +19,8 @@ class TransactionFailedScreen extends StatelessWidget {
     final toKoulId = routeData['tokoulid'];
     final route = routeData['route'];
 
-    return WillPopScope(
+    return PopScope(
+      canPop: false,
       child: Scaffold(
         body: SafeArea(
           child: Column(
@@ -127,7 +128,7 @@ class TransactionFailedScreen extends StatelessWidget {
           ),
         ),
       ),
-      onWillPop: () async => false,
+      // onWillPop: () async => false,
     );
   }
 }

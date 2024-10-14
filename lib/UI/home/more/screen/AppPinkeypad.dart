@@ -54,12 +54,11 @@ class _AppPINKeypadState extends State<AppPINKeypad> {
                           setState(
                             () {
                               if (inputnum.length == 4) {
-                                if (route == AppPINSettingRoute.create) {
-                                  context
-                                      .read<AuthBloc>()
-                                      .add(CreateAppPINEvent(appPIN: inputnum));
-                                } else {}
+                                context.read<AuthBloc>().add(
+                                    AppPINOperationsEvent(
+                                        appPIN: inputnum, route: route));
                               }
+
                               if (inputnum.length < 4) {
                                 valid = false;
                               }
@@ -175,8 +174,9 @@ class _AppPINKeypadState extends State<AppPINKeypad> {
 
   @override
   Widget build(BuildContext context) {
-    AppPINSettingRoute routeData =
-        ModalRoute.of(context)!.settings.arguments as AppPINSettingRoute;
+    AppPINSettingRoute? routeData =
+        ModalRoute.of(context)!.settings.arguments as AppPINSettingRoute?;
+    routeData ??= AppPINSettingRoute.forgot; //if null
     final screenSize = MediaQuery.sizeOf(context);
     return Scaffold(
       backgroundColor: Colors.grey.shade900,
@@ -184,13 +184,27 @@ class _AppPINKeypadState extends State<AppPINKeypad> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back_ios_new,
+                    color: Colors.white,
+                  )),
+            ),
             SizedBox(
-              height: screenSize.height * 0.040,
+              height: screenSize.height * 0.000,
             ),
             Text(
               routeData == AppPINSettingRoute.create
                   ? "Create a 4-digit PIN"
-                  : "Update a 4-digit PIN",
+                  : routeData == AppPINSettingRoute.update ||
+                          routeData == AppPINSettingRoute.forgot
+                      ? "Create a new 4-digit PIN"
+                      : "Enter your App PIN",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: screenSize.height * 0.029,
@@ -243,7 +257,8 @@ class _AppPINKeypadState extends State<AppPINKeypad> {
               child: BlocListener<AuthBloc, AuthState>(
                 listener: (context, state) {
                   if (state is EnterPINLoadingState) {
-                    Navigator.of(context).pushNamed(Loading.routeName);
+                    Navigator.of(context)
+                        .pushNamed(Loading.routeName, arguments: routeData);
                   }
                 },
                 child: SizedBox(
@@ -260,7 +275,7 @@ class _AppPINKeypadState extends State<AppPINKeypad> {
               ),
             ),
             SizedBox(
-              height: screenSize.height * 0.145,
+              height: screenSize.height * 0.125,
             ),
             Wrap(
               children: [
@@ -272,7 +287,8 @@ class _AppPINKeypadState extends State<AppPINKeypad> {
                         child: keyPad(
                             num: keynum,
                             screenSize: screenSize,
-                            route: routeData)),
+                            route: routeData ??= AppPINSettingRoute
+                                .forgot)), //put the value of forgot when the value is null
                   ),
                 ),
               ],

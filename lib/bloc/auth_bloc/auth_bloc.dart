@@ -6,6 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+import 'package:koul_network/enums/app_pin_settting.dart';
 import 'package:koul_network/enums/auth_type_enum.dart';
 import 'package:koul_network/helpers/helper_functions/trim_phno.dart';
 import 'package:koul_network/model/contact.dart';
@@ -51,9 +52,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SecureSignInEvent>(_secureSignIn);
     on<SecureSignInverifyEvent>(_secureSignInVerify);
     on<EnterAppPINEvent>(_enterappPIN); //enter app PIN
-    //create App PIN / Reset
-    on<CreateAppPINEvent>(_createAppPIN);
-    //Delete App PIN / Remove
+    on<AppPINOperationsEvent>(_createAppPIN); //handle [create, reset, delete]
   }
   //set state to AuthInitial
   void _setstatetiinitial(
@@ -740,11 +739,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _createAppPIN(
-      CreateAppPINEvent event, Emitter<AuthState> emit) async {
+      AppPINOperationsEvent event, Emitter<AuthState> emit) async {
     final currentUser = CurrentUserSingleton.getCurrentUserInstance();
 
     emit(EnterPINLoadingState());
-    final createAppPINroute = "$url/createapppin";
+    final routeValue = event.route == AppPINSettingRoute.delete
+        ? "deleteapppin"
+        : "createapppin";
+    final createAppPINroute = "$url/$routeValue";
     try {
       final response = await http.post(
         Uri.parse(createAppPINroute),
@@ -756,11 +758,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           },
         ),
       );
-      if (response.statusCode == HttpStatus.created &&
+      //http status
+      //'created 201' for reset and create PIN
+      //'ok 200' for delete
+      if ((response.statusCode == HttpStatus.created ||
+              response.statusCode == HttpStatus.ok) &&
           response.body.toString() == "done") {
-        await Future.delayed(const Duration(milliseconds: 5000));
+        await Future.delayed(event.route == AppPINSettingRoute.delete
+            ? const Duration(milliseconds: 1500)
+            : const Duration(milliseconds: 5000));
         if (!emit.isDone) {
-          emit(AppPINCreatedState());
+          if (event.route == AppPINSettingRoute.forgot) {
+            emit(ForgotAppPINSuccessState());
+          } else {
+            emit(AppPINCreatedState());
+          }
         }
       } else {
         emit(AppPINCreationFailedState(error: response.body.toString()));

@@ -35,9 +35,13 @@ class _AccountSettingState extends State<AccountSetting> {
               text: "Reset password",
               icon: Icons.password,
               onTap: () {
-                Navigator.of(context).pushNamed(
-                  ResetPasswordScreen.routeName,
-                );
+                // Navigator.of(context).pushNamed(
+                //   ResetPasswordScreen.routeName,
+                // );
+                authenticateWithBiometrics(
+                    context: context,
+                    toKoulId: currentUser.id,
+                    route: ResetPasswordScreen.routeName);
               },
             ),
           buildTiles(
@@ -53,7 +57,7 @@ class _AccountSettingState extends State<AccountSetting> {
           ),
           buildTiles(
             context: context,
-            text: "Update KOUL PIN",
+            text: "Reset KOUL PIN",
             icon: Icons.pin,
             onTap: () {
               authenticateWithBiometrics(

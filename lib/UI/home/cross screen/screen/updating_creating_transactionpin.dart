@@ -21,43 +21,57 @@ class _UpdatingCreatingTransactionpinState
   Widget build(BuildContext context) {
     final toKoulId = ModalRoute.of(context)!.settings.arguments as String;
 
-    return Scaffold(
-      body: SafeArea(
-        child: BlocConsumer<KoulAccountBloc, KoulAccountState>(
-          listener: (context, state) {
-            if (state is TransactionPinUpdatedState) {
-              if (toKoulId ==
-                  CurrentUserSingleton.getCurrentUserInstance().id) {
-                Navigator.of(context).pop();
-              } else {
-                context
-                    .read<KoulAccountBloc>()
-                    .add(GetTransactionListEvent(koulId: toKoulId));
-                final currentUserId =
-                    CurrentUserSingleton.getCurrentUserInstance().id;
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        body: SafeArea(
+          child: BlocConsumer<KoulAccountBloc, KoulAccountState>(
+            listener: (context, state) {
+              if (state is TransactionPinUpdatedState) {
+                if (toKoulId ==
+                    CurrentUserSingleton.getCurrentUserInstance().id) {
+                  Navigator.of(context).pop();
+                } else {
+                  context
+                      .read<KoulAccountBloc>()
+                      .add(GetTransactionListEvent(koulId: toKoulId));
+                  final currentUserId =
+                      CurrentUserSingleton.getCurrentUserInstance().id;
 
-                getCurrentuserKoulAccountDatail(currentUserId);
-                Navigator.of(context).popUntil(
-                    ModalRoute.withName(PreviousTransactionsScreen.routeName));
+                  getCurrentuserKoulAccountDatail(currentUserId);
+                  Navigator.of(context).popUntil(ModalRoute.withName(
+                      PreviousTransactionsScreen.routeName));
+                }
               }
-            }
-          },
-          builder: (context, state) {
-            if (state is LoadingState) {
-              return Center(
-                child: Lottie.asset(
-                  "assets/updatepassword.json",
-                  height: 250,
-                  width: 300,
-                  repeat: false,
-                ),
-              );
-            }
-            if (state is FailureState) {
-              //
-            }
-            return const SizedBox();
-          },
+            },
+            builder: (context, state) {
+              if (state is LoadingState) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Transform.scale(
+                        scale: 1.5,
+                        child: Lottie.asset(
+                          "assets/updatepassword.json",
+                          repeat: false,
+                        ),
+                      ),
+                      Text(
+                        "Creating KOUL PIN...",
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ],
+                  ),
+                );
+              }
+              if (state is FailureState) {
+                //
+              }
+              return const SizedBox();
+            },
+          ),
         ),
       ),
     );

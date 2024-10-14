@@ -23,7 +23,9 @@ Future<void> authenticateWithBiometrics(
         Navigator.of(scaffoldKey.currentContext!)
             .pushNamed(SetupTransactionPin.routeName, arguments: toKoulId);
       } else if (route.isNotEmpty) {
-        Navigator.of(scaffoldKey.currentContext!).pushNamed(route);
+        // Navigator.of(scaffoldKey.currentContext!).pushNamed(route);
+        if (!context.mounted) return;
+        Navigator.of(context).pushNamed(route);
       }
       print('Successfully authenticated');
     }

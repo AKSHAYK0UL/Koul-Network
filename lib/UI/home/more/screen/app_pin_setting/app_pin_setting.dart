@@ -37,16 +37,26 @@ class AppPinSetting extends StatelessWidget {
           if (currentUser.appPINstatus)
             buildTiles(
               context: context,
-              text: "Update App PIN",
+              text: "Reset App PIN",
               icon: Icons.change_circle,
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed(
+                  AppPINKeypad.routeName,
+                  arguments: AppPINSettingRoute.update,
+                );
+              },
             ),
           if (currentUser.appPINstatus)
             buildTiles(
               context: context,
               text: "Delete App PIN",
               icon: Icons.delete,
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed(
+                  AppPINKeypad.routeName,
+                  arguments: AppPINSettingRoute.delete,
+                );
+              },
             ),
         ],
       ),

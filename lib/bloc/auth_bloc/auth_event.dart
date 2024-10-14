@@ -143,7 +143,8 @@ final class EnterAppPINEvent extends AuthEvent {
   EnterAppPINEvent({required this.appPIN});
 }
 
-final class CreateAppPINEvent extends AuthEvent {
+final class AppPINOperationsEvent extends AuthEvent {
+  final AppPINSettingRoute route;
   final String appPIN;
-  CreateAppPINEvent({required this.appPIN});
+  AppPINOperationsEvent({required this.appPIN, required this.route});
 }

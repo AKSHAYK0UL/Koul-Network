@@ -61,7 +61,8 @@ class _TranactionDoneScreenState extends State<TranactionDoneScreen>
         context.read<KoulAccountBloc>().state as TranactionSuccessfullState;
     final screenSize = MediaQuery.sizeOf(context);
 
-    return WillPopScope(
+    return PopScope(
+      canPop: false,
       child: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
@@ -134,7 +135,7 @@ class _TranactionDoneScreenState extends State<TranactionDoneScreen>
           ),
         ),
       ),
-      onWillPop: () async => false,
+      // onWillPop: () async => false,
     );
   }
 }
