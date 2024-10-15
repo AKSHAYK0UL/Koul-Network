@@ -72,3 +72,5 @@ final class GetCachedContactsEvent extends KoulAccountEvent {
 final class ClearContactsEvent extends KoulAccountEvent {}
 
 final class AIGenratedReportEvent extends KoulAccountEvent {}
+
+final class GetChartDataEvent extends KoulAccountEvent {}

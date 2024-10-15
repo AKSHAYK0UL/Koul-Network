@@ -55,6 +55,7 @@ dependencies:
   pretty_qr_code: ^3.3.0
   flutter_contacts: ^1.1.9+2
   google_generative_ai: ^0.4.5
+  pie_chart: ^5.4.0
 
 
 dev_dependencies:

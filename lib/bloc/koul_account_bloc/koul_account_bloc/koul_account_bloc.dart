@@ -6,12 +6,14 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:http/http.dart' as http;
+import 'package:koul_network/helpers/chart/get_current_month_txn.dart';
 import 'package:koul_network/helpers/get_contacts.dart';
 import 'package:koul_network/helpers/helper_functions/contacts/cache_contacts.dart';
 import 'package:koul_network/helpers/helper_functions/sim_info.dart';
 import 'package:koul_network/helpers/helper_functions/trim_phno.dart';
 import 'package:koul_network/model/contact.dart';
 import 'package:koul_network/model/koul_account/account_balance.dart';
+import 'package:koul_network/model/koul_account/chart_data.dart';
 import 'package:koul_network/model/koul_account/koulid.dart';
 import 'package:koul_network/model/koul_account/transaction.dart';
 import 'package:koul_network/secrets/api.dart';
@@ -40,6 +42,7 @@ class KoulAccountBloc extends Bloc<KoulAccountEvent, KoulAccountState> {
     on<GetContactsEvent>(_getContacts);
     on<GetCachedContactsEvent>(_loadCachedContacts);
     on<AIGenratedReportEvent>(_aiGenratedReport);
+    on<GetChartDataEvent>(_getChartData); //get's all chart related data
   }
 
   void _setStateToKoulAccountInitial(
@@ -326,6 +329,8 @@ class KoulAccountBloc extends Bloc<KoulAccountEvent, KoulAccountState> {
       );
       if (resposne.statusCode == HttpStatus.accepted) {
         List<dynamic> rawTransactionsData = json.decode(resposne.body);
+        debugPrint("TXN list : ${resposne.body}");
+
         final List<Transaction> transactions =
             rawTransactionsData.map((t) => Transaction.fromJson(t)).toList();
         emit(AllTransactionsListState(transactions: transactions));
@@ -420,6 +425,38 @@ class KoulAccountBloc extends Bloc<KoulAccountEvent, KoulAccountState> {
         final geminiresponse = await model.generateContent(content);
         print(geminiresponse.text!);
         emit(AIReportState(report: geminiresponse.text!));
+      } else {
+        emit(FailureState(resposne.body.toString()));
+      }
+    } catch (e) {
+      emit(FailureState(e.toString()));
+    }
+  }
+
+////////////////////////////////////////////////////////////////////////////////
+  Future<void> _getChartData(
+      GetChartDataEvent event, Emitter<KoulAccountState> emit) async {
+    final currentUser = CurrentUserSingleton.getCurrentUserInstance();
+    emit(LoadingState());
+    try {
+      final getAllTransactionsRoute = Uri.parse("$url/gettransactionlist");
+      final resposne = await http.post(
+        getAllTransactionsRoute,
+        headers: {"Authorization": currentUser.authToken},
+        body: json.encode(
+          {
+            "userid": currentUser.id,
+          },
+        ),
+      );
+      if (resposne.statusCode == HttpStatus.accepted) {
+        List<dynamic> rawTransactionsData = json.decode(resposne.body);
+
+        final List<Transaction> transactions =
+            rawTransactionsData.map((t) => Transaction.fromJson(t)).toList();
+        //helper func to get ChartData
+        final chartdata = getTXNChartData(transactions);
+        emit(ChartDataState(chartdata: chartdata));
       } else {
         emit(FailureState(resposne.body.toString()));
       }

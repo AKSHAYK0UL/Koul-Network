@@ -60,3 +60,9 @@ final class AIReportState extends KoulAccountState {
 
   AIReportState({required this.report});
 }
+
+//get's  all chart data of chart
+final class ChartDataState extends KoulAccountState {
+  final ChartDataModel chartdata;
+  ChartDataState({required this.chartdata});
+}

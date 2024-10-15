@@ -42,7 +42,7 @@ class _TransactionsState extends State<Transactions> with RouteAware {
           scrolledUnderElevation: 0,
           title: Text(
             "Ledger",
-            style: Theme.of(context).textTheme.titleLarge,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
         ),
         actions: [

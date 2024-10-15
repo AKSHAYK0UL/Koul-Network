@@ -42,7 +42,7 @@ class MoreTab extends StatelessWidget {
           ),
           buildTiles(
             context: context,
-            text: "Account setting",
+            text: "Account Setting",
             icon: Icons.settings,
             onTap: () {
               Navigator.of(context).pushNamed(AccountSetting.routeName);
@@ -50,7 +50,7 @@ class MoreTab extends StatelessWidget {
           ),
           buildTiles(
             context: context,
-            text: "Balance and more",
+            text: "Balance and More",
             icon: Icons.account_balance,
             onTap: () {
               Navigator.of(context).pushNamed(CheckbalanceScreen.routeName);

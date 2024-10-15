@@ -19,18 +19,18 @@ class UsageTab extends StatelessWidget {
         children: [
           buildTiles(
             context: context,
-            text: "Usage",
-            icon: Icons.data_usage,
-            onTap: () {
-              Navigator.of(context).pushNamed(UsageScreen.routeName);
-            },
-          ),
-          buildTiles(
-            context: context,
             text: "AI Report",
             icon: Icons.file_copy,
             onTap: () {
               Navigator.of(context).pushNamed(AiReport.routeName);
+            },
+          ),
+          buildTiles(
+            context: context,
+            text: "Usage Chart",
+            icon: Icons.data_usage,
+            onTap: () {
+              Navigator.of(context).pushNamed(UsageScreen.routeName);
             },
           ),
           buildTiles(

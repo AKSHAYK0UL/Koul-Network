@@ -270,7 +270,7 @@ class _SetupTransactionPinState extends State<SetupTransactionPin> {
                         height: screenSize.height * 0.04088,
                       )
                     : Text(
-                        "Create 5 digit pin",
+                        "Create 5 digit PIN",
                         style: Theme.of(context)
                             .textTheme
                             .titleMedium!

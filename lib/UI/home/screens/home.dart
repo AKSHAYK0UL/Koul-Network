@@ -19,11 +19,6 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.sizeOf(context);
     final state = context.read<AuthBloc>().state as UserInfoState;
-    // String? authType;
-    // if (Hive.box("userid").isNotEmpty) {
-    //   authType = Hive.box("userid").get("authtype").toString();
-    // }
-
     return ColoredBox(
       color: const Color.fromARGB(255, 44, 43, 43),
       child: SafeArea(
@@ -42,22 +37,6 @@ class Home extends StatelessWidget {
                     state.userName[0], state.userName[0].toUpperCase()),
                 style: Theme.of(context).textTheme.titleMedium,
               ),
-              // trailing: IconButton(
-              //     onPressed: () async {
-              //       CurrentUserSingleton.clearCurrentUserInstance();
-              //       if (authType == AuthType.emailAuth.toString()) {
-              //         context.read<AuthBloc>().add(AuthLogOutEvent());
-              //       }
-
-              //       if (authType == AuthType.googleAuth.toString()) {
-              //         context.read<AuthBloc>().add(AuthLogOutEvent());
-              //         context.read<AuthBloc>().add(GoogleSignOutEvent());
-              //       }
-              //     },
-              //     icon: const Icon(
-              //       Icons.logout,
-              //       color: Colors.white,
-              //     )),
             ),
           ),
           body: Padding(

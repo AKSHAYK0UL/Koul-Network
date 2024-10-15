@@ -16,7 +16,6 @@ class _TransactionPinState extends State<TransactionPin> {
       required String toKoulId,
       required double amount,
       required String toName}) {
-    print("TTTTPIN $inputnum");
     context.read<KoulAccountBloc>().add(
           PayToKoulIdEvent(
               transactionPin: transactionPin,
@@ -215,7 +214,7 @@ class _TransactionPinState extends State<TransactionPin> {
               height: screenSize.height * 0.010,
             ),
             Text(
-              "Enter your Koul pin",
+              "Enter your 5-digit KOUL PIN",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: screenSize.height * 0.029,
