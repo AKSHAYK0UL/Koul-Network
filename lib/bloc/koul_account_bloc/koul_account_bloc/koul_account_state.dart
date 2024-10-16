@@ -66,3 +66,8 @@ final class ChartDataState extends KoulAccountState {
   final ChartDataModel chartdata;
   ChartDataState({required this.chartdata});
 }
+
+//back press
+//set the app state to back press wrapper state
+
+final class BackPressWrapperState extends KoulAccountState {}

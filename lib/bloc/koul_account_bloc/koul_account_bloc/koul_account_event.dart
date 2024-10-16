@@ -74,3 +74,6 @@ final class ClearContactsEvent extends KoulAccountEvent {}
 final class AIGenratedReportEvent extends KoulAccountEvent {}
 
 final class GetChartDataEvent extends KoulAccountEvent {}
+
+//back press wrapper event
+final class BackPressWrapperEvent extends KoulAccountEvent {}

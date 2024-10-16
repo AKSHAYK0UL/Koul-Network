@@ -31,6 +31,7 @@ class KoulAccountBloc extends Bloc<KoulAccountEvent, KoulAccountState> {
 
   KoulAccountBloc() : super(KoulAccountInitial()) {
     on<SetStateToInitial>(_setStateToKoulAccountInitial);
+    // on<BackPressWrapperEvent>(_backPressWrapper);
     on<AccountBalanceEvent>(_getAccountBalance);
     on<KoulAccountExistEvent>(_koulAccountExist);
     on<PayToKoulIdEvent>(_payToKoulId);
@@ -43,12 +44,21 @@ class KoulAccountBloc extends Bloc<KoulAccountEvent, KoulAccountState> {
     on<GetCachedContactsEvent>(_loadCachedContacts);
     on<AIGenratedReportEvent>(_aiGenratedReport);
     on<GetChartDataEvent>(_getChartData); //get's all chart related data
+    // Handle cancellation
   }
 
   void _setStateToKoulAccountInitial(
       SetStateToInitial event, Emitter<KoulAccountState> emit) {
     emit(KoulAccountInitial());
   }
+
+//wrapper
+  // void _backPressWrapper(
+  //     BackPressWrapperEvent event, Emitter<KoulAccountState> emit) {
+  //   if (!emit.isDone) {
+  //     emit(BackPressWrapperState());
+  //   }
+  // }
 
   Future<void> _getAccountBalance(
       AccountBalanceEvent event, Emitter<KoulAccountState> emit) async {
@@ -424,6 +434,7 @@ class KoulAccountBloc extends Bloc<KoulAccountEvent, KoulAccountState> {
         ];
         final geminiresponse = await model.generateContent(content);
         print(geminiresponse.text!);
+
         emit(AIReportState(report: geminiresponse.text!));
       } else {
         emit(FailureState(resposne.body.toString()));
