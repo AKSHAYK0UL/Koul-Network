@@ -79,7 +79,6 @@ ThemeData themeDATA(BuildContext context) {
       displayMedium: TextStyle(
         color: Colors.white,
         fontSize: screenSize.height * 0.022, //16.5
-
         fontWeight: FontWeight.w500,
       ),
       displaySmall: TextStyle(

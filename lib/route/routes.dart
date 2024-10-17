@@ -33,7 +33,7 @@ import 'package:koul_network/UI/home/cross%20screen/screen/tranaction_done.dart'
 import 'package:koul_network/UI/home/screens/navbar_screen.dart';
 import 'package:koul_network/UI/home/screens/transactions.dart';
 import 'package:koul_network/UI/home/usage/screens/ai_report.dart';
-import 'package:koul_network/UI/home/usage/screens/usage.dart';
+import 'package:koul_network/UI/home/usage/screens/usage_detail/tabcontroller.dart';
 
 //routes table
 Map<String, WidgetBuilder> routeTable = {
@@ -71,9 +71,9 @@ Map<String, WidgetBuilder> routeTable = {
   AccountSetting.routeName: (context) => const AccountSetting(),
   ResetPasswordScreen.routeName: (context) => const ResetPasswordScreen(),
   AiReport.routeName: (context) => const AiReport(),
-  UsageScreen.routeName: (context) => const UsageScreen(),
   NavbarScreen.routeName: (context) => const NavbarScreen(),
   AppPinSetting.routeName: (context) => const AppPinSetting(),
   AppPINKeypad.routeName: (context) => const AppPINKeypad(),
   Loading.routeName: (context) => const Loading(),
+  Tabcontroller.routeName: (context) => const Tabcontroller(),
 };

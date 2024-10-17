@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:koul_network/UI/home/more/widget/build_tiles.dart';
 import 'package:koul_network/UI/home/usage/screens/ai_report.dart';
-import 'package:koul_network/UI/home/usage/screens/usage.dart';
+import 'package:koul_network/UI/home/usage/screens/usage_detail/tabcontroller.dart';
 
 class UsageTab extends StatelessWidget {
   const UsageTab({super.key});
@@ -27,10 +27,10 @@ class UsageTab extends StatelessWidget {
           ),
           buildTiles(
             context: context,
-            text: "Usage Chart",
+            text: "Usage Detail",
             icon: Icons.data_usage,
             onTap: () {
-              Navigator.of(context).pushNamed(UsageScreen.routeName);
+              Navigator.of(context).pushNamed(Tabcontroller.routeName);
             },
           ),
           buildTiles(

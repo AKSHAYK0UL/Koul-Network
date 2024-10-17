@@ -44,21 +44,12 @@ class KoulAccountBloc extends Bloc<KoulAccountEvent, KoulAccountState> {
     on<GetCachedContactsEvent>(_loadCachedContacts);
     on<AIGenratedReportEvent>(_aiGenratedReport);
     on<GetChartDataEvent>(_getChartData); //get's all chart related data
-    // Handle cancellation
   }
 
   void _setStateToKoulAccountInitial(
       SetStateToInitial event, Emitter<KoulAccountState> emit) {
     emit(KoulAccountInitial());
   }
-
-//wrapper
-  // void _backPressWrapper(
-  //     BackPressWrapperEvent event, Emitter<KoulAccountState> emit) {
-  //   if (!emit.isDone) {
-  //     emit(BackPressWrapperState());
-  //   }
-  // }
 
   Future<void> _getAccountBalance(
       AccountBalanceEvent event, Emitter<KoulAccountState> emit) async {
