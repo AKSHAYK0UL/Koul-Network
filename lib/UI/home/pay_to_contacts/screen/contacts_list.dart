@@ -66,6 +66,8 @@ class _ContactsListState extends State<ContactsList> {
         color: Colors.white,
         child: BlocConsumer<KoulAccountBloc, KoulAccountState>(
           listener: (context, state) {
+            debugPrint("PAY TO CONTACTS STATE : $state");
+
             if (state is KoulIdSuccessState) {
               Navigator.of(context).pushNamed(
                 PreviousTransactionsScreen.routeName,
@@ -181,7 +183,91 @@ class _ContactsListState extends State<ContactsList> {
                 ],
               );
             }
-            return const SizedBox();
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                KoulTextField(
+                  autoFocus: false,
+                  onTextChanged: (searchKeywords) {
+                    updateContacts(_allContacts, searchKeywords);
+                  },
+                  labelText: "Enter Name or Phone no.",
+                  keyBoardType: TextInputType.text,
+                  prefixValue: "",
+                  maxLength: 0,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: screenSize.height * 0.0265,
+                      top: screenSize.height * 0.0133,
+                      bottom: screenSize.height * 0.0200),
+                  child: Text(
+                    "All people on KOUL Network",
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ),
+                Expanded(
+                  child: _filteredContacts.isEmpty
+                      ? Center(
+                          child: Text(
+                            "No Contact Found!",
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                        )
+                      : ListView.builder(
+                          itemCount: _filteredContacts.length,
+                          itemBuilder: (context, index) {
+                            final contactInfo = _filteredContacts[index];
+                            return Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: screenSize.height * 0.008,
+                                  vertical: screenSize.height * 0.004),
+                              child: ListTile(
+                                onTap: () {
+                                  context.read<KoulAccountBloc>().add(
+                                        PayToPhoneNoEvent(
+                                          phoneNo: contactInfo.phone,
+                                        ),
+                                      );
+                                  updateContacts(_allContacts, "");
+                                },
+                                minTileHeight: screenSize.height * 0.105,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                tileColor:
+                                    const Color.fromARGB(255, 40, 39, 39),
+                                leading: CircleAvatar(
+                                  radius: 25,
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 22, 22, 22),
+                                  child: Text(
+                                    contactInfo.displayName[0].toUpperCase(),
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                  ),
+                                ),
+                                title: Text(
+                                  contactInfo.displayName.replaceFirst(
+                                    contactInfo.displayName[0],
+                                    contactInfo.displayName[0].toUpperCase(),
+                                  ),
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
+                                ),
+                                subtitle: Text(
+                                  contactInfo.phone,
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                ),
+              ],
+            );
+            // return const SizedBox();
           },
         ),
       ),
