@@ -34,7 +34,7 @@ void showModelSheet(BuildContext context, String error) {
         child: Padding(
           padding: EdgeInsets.symmetric(
               horizontal: screenSize.width * 0.030,
-              vertical: screenSize.width * 0.080),
+              vertical: screenSize.width * 0.070),
           child: SingleChildScrollView(
             child: Column(
               children: [

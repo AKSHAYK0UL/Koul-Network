@@ -31,7 +31,6 @@ class KoulAccountBloc extends Bloc<KoulAccountEvent, KoulAccountState> {
 
   KoulAccountBloc() : super(KoulAccountInitial()) {
     on<SetStateToInitial>(_setStateToKoulAccountInitial);
-    // on<BackPressWrapperEvent>(_backPressWrapper);
     on<AccountBalanceEvent>(_getAccountBalance);
     on<KoulAccountExistEvent>(_koulAccountExist);
     on<PayToKoulIdEvent>(_payToKoulId);

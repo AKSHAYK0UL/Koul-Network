@@ -26,9 +26,12 @@ class RecentTxn extends StatelessWidget {
               horizontal: screenSize.height * 0.03,
               vertical: screenSize.height * 0.02,
             ),
-            child: Text(
-              "All transactions for the month of ${state.chartdata.month}",
-              style: Theme.of(context).textTheme.titleSmall,
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Text(
+                "All transactions for the month of ${state.chartdata.month}",
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
             ),
           ),
         ),

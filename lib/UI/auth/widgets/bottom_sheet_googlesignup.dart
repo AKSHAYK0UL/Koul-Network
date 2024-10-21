@@ -156,12 +156,16 @@ class _BuildGoogleSignUpBottomSheetState
                         SizedBox(
                           height: screenSize.height * 0.013,
                         ),
-                        Text(
-                          "Ensure the same SIM card used during registration is in your device to make a transaction",
-                          style: Theme.of(context)
-                              .textTheme
-                              .displayMedium!
-                              .copyWith(fontSize: screenSize.height * 0.02080),
+                        FittedBox(
+                          fit: BoxFit.contain,
+                          child: Text(
+                            "Ensure the same SIM card used during registration\nis in your device to make a transaction",
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium!
+                                .copyWith(
+                                    fontSize: screenSize.height * 0.02080),
+                          ),
                         ),
                         SizedBox(
                           height: screenSize.width * 0.010,

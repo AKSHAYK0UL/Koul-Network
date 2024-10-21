@@ -38,21 +38,24 @@ class UsageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Map<String, double> dataMap = {
-      "Total Credit TXN Amount in Rupees": state.chartdata.creditAmount,
       "Total Debit TXN Amount in Rupees": state.chartdata.debitAmount,
-      "Max Payment To ${state.chartdata.largeAmountPaidTo.name}":
-          state.chartdata.largeAmountPaidTo.amount,
+      "Total Credit TXN Amount in Rupees": state.chartdata.creditAmount,
       "Max Receipt From ${state.chartdata.largeAmountReceivedFrom.name}":
           state.chartdata.largeAmountReceivedFrom.amount,
+      "Max Payment To ${state.chartdata.largeAmountPaidTo.name}":
+          state.chartdata.largeAmountPaidTo.amount,
     };
     return Column(
       children: [
-        Text(
-          "Note: This chart displays data for ${state.chartdata.month} month only.",
-          style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                fontWeight: FontWeight.normal,
-                color: Colors.red,
-              ),
+        FittedBox(
+          fit: BoxFit.contain,
+          child: Text(
+            "Note: This chart displays data for ${state.chartdata.month} month only.",
+            style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                  fontWeight: FontWeight.normal,
+                  color: Colors.red,
+                ),
+          ),
         ),
         buildPieChart(context, dataMap),
       ],
