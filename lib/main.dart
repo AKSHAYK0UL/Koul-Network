@@ -43,10 +43,10 @@ class Koul extends StatelessWidget {
         )
       ],
       child: MaterialApp(
+        title: "Koul Network",
         debugShowCheckedModeBanner: false,
         theme: themeDATA(context),
         home: const HasUserDataOrNot(),
-        // home: AuthScreen(),
         routes: routeTable,
       ),
     );

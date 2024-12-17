@@ -25,9 +25,9 @@ part 'koul_account_state.dart';
 class KoulAccountBloc extends Bloc<KoulAccountEvent, KoulAccountState> {
   //koul account
 
-  // final url = "http://10.0.2.2:8000";
+  final url = "http://10.0.2.2:8000";
 
-  final url = KOUL_SERVICE_API_URL;
+  // final url = KOUL_SERVICE_API_URL;
 
   KoulAccountBloc() : super(KoulAccountInitial()) {
     on<SetStateToInitial>(_setStateToKoulAccountInitial);
