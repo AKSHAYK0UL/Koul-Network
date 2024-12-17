@@ -112,7 +112,7 @@ Widget buildUserCardFront(
                       .copyWith(color: Colors.white),
                 ),
                 Text(
-                  "Nex",
+                  "Koul",
                   style: Theme.of(context)
                       .textTheme
                       .labelSmall!
@@ -252,7 +252,7 @@ Widget buildCardBackInfo(
                       .copyWith(color: Colors.white),
                 ),
                 Text(
-                  "Nex",
+                  "Koul",
                   style: Theme.of(context)
                       .textTheme
                       .labelSmall!
