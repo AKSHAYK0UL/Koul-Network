@@ -81,7 +81,7 @@ void showDialogOnLogOut(BuildContext context) {
           style: Theme.of(context).textTheme.titleMedium,
         ),
         content: Text(
-          "Are you sure you want to logout?",
+          "Are you sure you want to Sign Out?",
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         actions: [

@@ -205,7 +205,7 @@ class _EnterAppPINState extends State<EnterAppPIN> {
                   PopupMenuItem(
                     value: EnterAppPINOptions.logOut,
                     child: Text(
-                      "Logout?",
+                      "Sign Out?",
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
