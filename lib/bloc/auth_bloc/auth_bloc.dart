@@ -457,7 +457,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthInitial()); //state indicating no action taken
         return;
       }
-      print(googleUserData.displayName);
+      print("**************googleUserData.displayName************");
       final saveGdata = await _saveguser(
         userId: googleUserData.id,
         userName: googleUserData.displayName!,

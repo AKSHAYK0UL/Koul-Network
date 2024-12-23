@@ -56,6 +56,7 @@ dependencies:
   google_generative_ai: ^0.4.5
   pie_chart: ^5.4.0
   mobile_scanner: ^4.0.1
+  flutter_stripe: ^10.2.0
 
 
 

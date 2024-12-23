@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:koul_network/UI/auth/widgets/hasUserData_OrNot.dart';
 
 import 'package:koul_network/bloc/auth_bloc/auth_bloc.dart';
 import 'package:koul_network/bloc/koul_account_bloc/koul_account_bloc/koul_account_bloc.dart';
+import 'package:koul_network/bloc/stripe_bloc/bloc/stripe_bloc.dart';
 import 'package:koul_network/model/contact.dart';
 import 'package:koul_network/route/routes.dart';
+import 'package:koul_network/secrets/api.dart';
 import 'package:koul_network/theme/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Stripe.publishableKey = PUBLISHABLE_KEY;
+
   await Hive.initFlutter();
   await Hive.openBox("auth");
   Hive.registerAdapter(UserContactAdapter());
@@ -40,6 +45,9 @@ class Koul extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => KoulAccountBloc(),
+        ),
+        BlocProvider(
+          create: (context) => StripeBloc(),
         )
       ],
       child: MaterialApp(

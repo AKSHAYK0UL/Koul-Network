@@ -9,6 +9,7 @@ import 'package:koul_network/UI/home/pay_to_phone/pay_to_phone.dart';
 import 'package:koul_network/UI/home/widgets/menu_options.dart';
 import 'package:koul_network/UI/home/widgets/user_card.dart';
 import 'package:koul_network/bloc/auth_bloc/auth_bloc.dart';
+import 'package:koul_network/bloc/stripe_bloc/bloc/stripe_bloc.dart';
 import 'package:koul_network/helpers/helper_functions/greeting.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 
@@ -38,6 +39,13 @@ class Home extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    context.read<StripeBloc>().add(AddFundEvent(amount: 10));
+                  },
+                  icon: Icon(Icons.add))
+            ],
           ),
           body: Padding(
             padding: EdgeInsets.all(screenSize.width * 0.02),
@@ -46,6 +54,27 @@ class Home extends StatelessWidget {
               children: [
                 SizedBox(
                   height: screenSize.width * 0.0450,
+                ),
+                BlocConsumer<StripeBloc, StripeState>(
+                  listener: (context, state) {
+                    if (state is ErrorState) {
+                      buildSnackBar(context, state.errorMessage);
+                    }
+                    if (state is SuccessState) {
+                      context
+                          .read<StripeBloc>()
+                          .add(PaymentSheetEvent(clientId: state.clientId));
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is LoadingState) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+
+                    return Container();
+                  },
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(
