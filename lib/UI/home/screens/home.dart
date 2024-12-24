@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:koul_network/UI/add_fund/screen/self_transfer.dart';
 import 'package:koul_network/UI/global_widget/build_dialogbox.dart';
 import 'package:koul_network/UI/global_widget/snackbar_customwidget.dart';
 import 'package:koul_network/UI/home/pay_to_contacts/screen/contacts_list.dart';
@@ -9,7 +10,6 @@ import 'package:koul_network/UI/home/pay_to_phone/pay_to_phone.dart';
 import 'package:koul_network/UI/home/widgets/menu_options.dart';
 import 'package:koul_network/UI/home/widgets/user_card.dart';
 import 'package:koul_network/bloc/auth_bloc/auth_bloc.dart';
-import 'package:koul_network/bloc/stripe_bloc/bloc/stripe_bloc.dart';
 import 'package:koul_network/helpers/helper_functions/greeting.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 
@@ -42,7 +42,7 @@ class Home extends StatelessWidget {
             actions: [
               IconButton(
                   onPressed: () {
-                    context.read<StripeBloc>().add(AddFundEvent(amount: 10));
+                    // context.read<StripeBloc>().add(AddFundEvent(amount: 10));
                   },
                   icon: Icon(Icons.add))
             ],
@@ -53,28 +53,7 @@ class Home extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: screenSize.width * 0.0450,
-                ),
-                BlocConsumer<StripeBloc, StripeState>(
-                  listener: (context, state) {
-                    if (state is ErrorState) {
-                      buildSnackBar(context, state.errorMessage);
-                    }
-                    if (state is SuccessState) {
-                      context
-                          .read<StripeBloc>()
-                          .add(PaymentSheetEvent(clientId: state.clientId));
-                    }
-                  },
-                  builder: (context, state) {
-                    if (state is LoadingState) {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-
-                    return Container();
-                  },
+                  height: screenSize.width * 0.0200,
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(
@@ -88,7 +67,7 @@ class Home extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: screenSize.width * 0.0300,
+                  height: screenSize.width * 0.0050,
                 ),
                 SizedBox(
                   height: screenSize.width * 0.612,
@@ -96,7 +75,7 @@ class Home extends StatelessWidget {
                   child: YourCard(state),
                 ),
                 SizedBox(
-                  height: screenSize.width * 0.0350,
+                  height: screenSize.width * 0.0200,
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(
@@ -110,7 +89,7 @@ class Home extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: screenSize.width * 0.0350,
+                  height: screenSize.width * 0.0100,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -168,7 +147,33 @@ class Home extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: screenSize.width * 0.0767,
+                  height: screenSize.width * 0.0240,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButton.icon(
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(SelfTransfer.routeName);
+                      },
+                      icon: Icon(Icons.loop),
+                      label: Text("Self Transfer"),
+                      style: TextButton.styleFrom(
+                          fixedSize: Size(screenSize.height * 0.230,
+                              screenSize.height * 0.0640)),
+                    ),
+                    TextButton.icon(
+                      onPressed: () {},
+                      icon: Icon(Icons.account_balance),
+                      label: Text("Other Account"),
+                      style: TextButton.styleFrom(
+                          fixedSize: Size(screenSize.height * 0.230,
+                              screenSize.height * 0.0640)),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: screenSize.width * 0.0467,
                 ),
                 Center(
                   child: Chip(

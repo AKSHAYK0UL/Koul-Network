@@ -17,15 +17,15 @@ class StripeBloc extends Bloc<StripeEvent, StripeState> {
   StripeBloc() : super(StripeInitial()) {
     on<AddFundEvent>(_addFund);
     on<PaymentSheetEvent>(_paymentSheet);
-    on<ProcessPaymentStateEvent>(_processPayment);
   }
+
   Future<void> _addFund(AddFundEvent event, Emitter<StripeState> emit) async {
     final currentUser = CurrentUserSingleton.getCurrentUserInstance();
     emit(LoadingState());
     try {
-      final getAllTransactionsRoute = Uri.parse("$url/create-payment-Intent");
-      final resposne = await http.post(
-        getAllTransactionsRoute,
+      final paymentIntentRoute = Uri.parse("$url/create-payment-Intent");
+      final response = await http.post(
+        paymentIntentRoute,
         headers: {"Authorization": currentUser.authToken},
         body: json.encode(
           {
@@ -34,10 +34,10 @@ class StripeBloc extends Bloc<StripeEvent, StripeState> {
           },
         ),
       );
-      if (resposne.statusCode == HttpStatus.ok) {
-        emit(SuccessState(clientId: resposne.body));
+      if (response.statusCode == HttpStatus.ok) {
+        emit(SuccessState(clientId: response.body));
       } else {
-        emit(ErrorState(errorMessage: resposne.body));
+        emit(ErrorState(errorMessage: response.body));
       }
     } catch (e) {
       emit(ErrorState(errorMessage: e.toString()));
@@ -46,6 +46,8 @@ class StripeBloc extends Bloc<StripeEvent, StripeState> {
 
   Future<void> _paymentSheet(
       PaymentSheetEvent event, Emitter<StripeState> emit) async {
+    final currentUser = CurrentUserSingleton.getCurrentUserInstance();
+
     try {
       await Stripe.instance.initPaymentSheet(
         paymentSheetParameters: SetupPaymentSheetParameters(
@@ -53,17 +55,53 @@ class StripeBloc extends Bloc<StripeEvent, StripeState> {
           merchantDisplayName: "Koul Network",
         ),
       );
-      add(ProcessPaymentStateEvent());
-    } catch (e) {
-      emit(ErrorState(errorMessage: e.toString()));
-    }
-  }
 
-  Future<void> _processPayment(
-      ProcessPaymentStateEvent event, Emitter<StripeState> emit) async {
-    try {
       await Stripe.instance.presentPaymentSheet();
-      await Stripe.instance.confirmPaymentSheetPayment();
+
+      final paymentIntent =
+          await Stripe.instance.retrievePaymentIntent(event.clientId);
+
+      if (paymentIntent.status == PaymentIntentsStatus.Succeeded) {
+        print("Amount ${paymentIntent.amount}");
+        final updateAccountUrl = Uri.parse("$url/update-kaccount");
+        final result = await http.post(
+          updateAccountUrl,
+          headers: {"Authorization": currentUser.authToken},
+          body: json.encode(
+            {
+              "userid": currentUser.id,
+              "amount": paymentIntent.amount,
+              "to": {
+                "name": currentUser.name,
+                "koul_id": currentUser.id,
+              },
+              "from": {
+                "name": currentUser.name,
+                "koul_id": currentUser.id,
+              }
+            },
+          ),
+        );
+        if (result.statusCode == HttpStatus.ok) {
+          emit(TransactionDoneState(
+              txnId: paymentIntent.id,
+              amount: (paymentIntent.amount / 100).toDouble()));
+        } else {
+          emit(ErrorState(
+              errorMessage: "Unable to update account: ${result.body}"));
+        }
+      } else {
+        emit(ErrorState(
+            errorMessage:
+                "Payment was not successful: ${paymentIntent.status}"));
+      }
+    } on StripeException catch (e) {
+      if (e.error.code.name == "Canceled") {
+        print("Payment sheet closed by the user.");
+        emit(StripeInitial());
+      } else {
+        emit(ErrorState(errorMessage: e.error.message ?? "An error occurred."));
+      }
     } catch (e) {
       emit(ErrorState(errorMessage: e.toString()));
     }

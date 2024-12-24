@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:koul_network/UI/add_fund/screen/fund_added_success.dart';
+import 'package:koul_network/UI/add_fund/screen/self_transfer.dart';
 import 'package:koul_network/UI/auth/screens/forgot_password.dart';
 import 'package:koul_network/UI/auth/screens/onsignup_with_google.dart';
 import 'package:koul_network/UI/auth/screens/secure_signin.dart';
@@ -76,4 +78,6 @@ Map<String, WidgetBuilder> routeTable = {
   AppPINKeypad.routeName: (context) => const AppPINKeypad(),
   Loading.routeName: (context) => const Loading(),
   Tabcontroller.routeName: (context) => const Tabcontroller(),
+  SelfTransfer.routeName: (context) => const SelfTransfer(),
+  FundAddedSuccess.routeName: (context) => const FundAddedSuccess(),
 };
