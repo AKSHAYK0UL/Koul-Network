@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:koul_network/UI/add_fund/screen/fund_added_success.dart';
+import 'package:koul_network/UI/add_fund/screen/paymentgataway.dart';
 import 'package:koul_network/UI/global_widget/snackbar_customwidget.dart';
 import 'package:koul_network/UI/home/pay_to_koul_id/widgets/amount_textfield.dart';
 import 'package:koul_network/bloc/stripe_bloc/bloc/stripe_bloc.dart';
@@ -36,15 +36,9 @@ class _SelfTransferState extends State<SelfTransfer> {
             if (state is ErrorState) {
               buildSnackBar(context, state.errorMessage);
             }
-            if (state is SuccessState) {
-              context
-                  .read<StripeBloc>()
-                  .add(PaymentSheetEvent(clientId: state.clientId));
-            }
-            if (state is TransactionDoneState) {
-              Navigator.of(context).pushReplacementNamed(
-                  FundAddedSuccess.routeName,
-                  arguments: state);
+
+            if (state is LoadingState) {
+              Navigator.of(context).pushNamed(Paymentgataway.routeName);
             }
           },
           builder: (context, state) {
@@ -141,9 +135,14 @@ class _SelfTransferState extends State<SelfTransfer> {
             height: screenSize.height * 0.071,
             child: ElevatedButton.icon(
               onPressed: () async {
-                context.read<StripeBloc>().add(AddFundEvent(
-                    amount:
-                        (double.parse(amountController.text) * 100).toInt()));
+                if (amountController.text.isEmpty ||
+                    (double.parse(amountController.text) * 100).toInt() < 1) {
+                  buildSnackBar(context, "payment must be at least ₹1");
+                } else {
+                  context.read<StripeBloc>().add(AddFundEvent(
+                      amount:
+                          (double.parse(amountController.text) * 100).toInt()));
+                }
               },
               icon: const Icon(Icons.forward),
               label: const Text("Proceed"),

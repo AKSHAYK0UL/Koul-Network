@@ -39,13 +39,6 @@ class Home extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    // context.read<StripeBloc>().add(AddFundEvent(amount: 10));
-                  },
-                  icon: Icon(Icons.add))
-            ],
           ),
           body: Padding(
             padding: EdgeInsets.all(screenSize.width * 0.02),
@@ -150,7 +143,7 @@ class Home extends StatelessWidget {
                   height: screenSize.width * 0.0240,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     TextButton.icon(
                       onPressed: () {
@@ -159,16 +152,16 @@ class Home extends StatelessWidget {
                       icon: Icon(Icons.loop),
                       label: Text("Self Transfer"),
                       style: TextButton.styleFrom(
-                          fixedSize: Size(screenSize.height * 0.230,
-                              screenSize.height * 0.0640)),
+                          fixedSize: Size(screenSize.height * 0.225,
+                              screenSize.height * 0.0620)),
                     ),
                     TextButton.icon(
                       onPressed: () {},
                       icon: Icon(Icons.account_balance),
                       label: Text("Other Account"),
                       style: TextButton.styleFrom(
-                          fixedSize: Size(screenSize.height * 0.230,
-                              screenSize.height * 0.0640)),
+                          fixedSize: Size(screenSize.height * 0.225,
+                              screenSize.height * 0.0620)),
                     ),
                   ],
                 ),

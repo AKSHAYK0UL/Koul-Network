@@ -41,6 +41,13 @@ class _YourCardState extends State<YourCard>
   }
 
   @override
+  void dispose() {
+    animationController.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.sizeOf(context);
     final currentState = context.read<KoulAccountBloc>().state;
@@ -227,7 +234,7 @@ Widget buildCardBackInfo(
 
   return Container(
     margin: EdgeInsets.symmetric(
-        vertical: screenSize.height * 0.01972,
+        vertical: screenSize.height * 0.01775,
         horizontal: screenSize.height * 0.0263),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -266,7 +273,7 @@ Widget buildCardBackInfo(
           height: screenSize.height * 0.0028,
         ),
         Text(
-          "₹${state.accountBalance.accountCurrentBalance.toString()}",
+          "₹${state.accountBalance.accountCurrentBalance.toString()}0",
           style: Theme.of(context).textTheme.headlineMedium!,
         ),
         SizedBox(
@@ -307,7 +314,7 @@ Widget buildCardBackInfo(
           ],
         ),
         SizedBox(
-          height: screenSize.height * 0.0281,
+          height: screenSize.height * 0.0262,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

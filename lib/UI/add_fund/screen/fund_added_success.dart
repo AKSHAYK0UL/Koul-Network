@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:koul_network/UI/home/cross%20screen/widget/transaction_detail.dart';
+import 'package:koul_network/bloc/koul_account_bloc/koul_account_bloc/koul_account_bloc.dart';
 import 'package:koul_network/bloc/stripe_bloc/bloc/stripe_bloc.dart';
 import 'package:koul_network/model/koul_account/from_to.dart';
 import 'package:koul_network/model/koul_account/transaction.dart';
@@ -124,6 +126,11 @@ class _FundAddedSuccessState extends State<FundAddedSuccess>
                           transactionId: txnData.txnId),
                       rightButtonText: "Done",
                       rightButtonFun: () {
+                        context
+                            .read<KoulAccountBloc>()
+                            .add(AccountBalanceEvent());
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
                         Navigator.of(context).pop();
                       },
                       rightButtonIcon: Icons.done,

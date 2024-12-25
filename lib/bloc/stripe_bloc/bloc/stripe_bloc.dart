@@ -47,7 +47,7 @@ class StripeBloc extends Bloc<StripeEvent, StripeState> {
   Future<void> _paymentSheet(
       PaymentSheetEvent event, Emitter<StripeState> emit) async {
     final currentUser = CurrentUserSingleton.getCurrentUserInstance();
-
+    emit(LoadingState());
     try {
       await Stripe.instance.initPaymentSheet(
         paymentSheetParameters: SetupPaymentSheetParameters(
@@ -70,6 +70,7 @@ class StripeBloc extends Bloc<StripeEvent, StripeState> {
           body: json.encode(
             {
               "userid": currentUser.id,
+              "txn_id": paymentIntent.id,
               "amount": paymentIntent.amount,
               "to": {
                 "name": currentUser.name,
