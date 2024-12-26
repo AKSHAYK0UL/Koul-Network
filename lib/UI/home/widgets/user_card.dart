@@ -273,7 +273,7 @@ Widget buildCardBackInfo(
           height: screenSize.height * 0.0028,
         ),
         Text(
-          "₹${state.accountBalance.accountCurrentBalance.toString()}0",
+          "₹${state.accountBalance.accountCurrentBalance.toStringAsFixed(2)}",
           style: Theme.of(context).textTheme.headlineMedium!,
         ),
         SizedBox(

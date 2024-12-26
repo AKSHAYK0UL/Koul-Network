@@ -8,9 +8,12 @@ final class AddFundEvent extends StripeEvent {
 }
 
 final class PaymentSheetEvent extends StripeEvent {
+  final String toName;
+  final String toKoulId;
   final String clientId;
 
-  PaymentSheetEvent({required this.clientId});
+  PaymentSheetEvent(
+      {required this.clientId, required this.toName, required this.toKoulId});
 }
 
 final class ProcessPaymentStateEvent extends StripeEvent {}

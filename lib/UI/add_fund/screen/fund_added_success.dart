@@ -22,10 +22,8 @@ class _FundAddedSuccessState extends State<FundAddedSuccess>
   late AnimationController _slideAnimationController;
   late Animation<Offset> _slideTransition;
   late Animation<double> _fadeTransition;
-
   @override
   void initState() {
-    super.initState();
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 2200));
     _slideAnimationController = AnimationController(
@@ -45,6 +43,7 @@ class _FundAddedSuccessState extends State<FundAddedSuccess>
         _slideAnimationController.forward();
       }
     });
+    super.initState();
   }
 
   @override
@@ -98,7 +97,7 @@ class _FundAddedSuccessState extends State<FundAddedSuccess>
                                 height: screenSize.height * 0.0264,
                               ),
                               Text(
-                                "₹${txnData.amount}0",
+                                "₹${txnData.amount.toStringAsFixed(2)}",
                                 style: TextStyle(
                                   fontSize: screenSize.height * 0.0558,
                                   fontWeight: FontWeight.normal,

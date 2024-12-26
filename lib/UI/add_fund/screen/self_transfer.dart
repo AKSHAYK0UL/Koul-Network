@@ -5,6 +5,7 @@ import 'package:koul_network/UI/global_widget/snackbar_customwidget.dart';
 import 'package:koul_network/UI/home/pay_to_koul_id/widgets/amount_textfield.dart';
 import 'package:koul_network/bloc/stripe_bloc/bloc/stripe_bloc.dart';
 import 'package:koul_network/main.dart';
+import 'package:koul_network/model/koul_account/from_to.dart';
 import 'package:koul_network/singleton/currentuser.dart';
 
 class SelfTransfer extends StatefulWidget {
@@ -38,15 +39,14 @@ class _SelfTransferState extends State<SelfTransfer> {
             }
 
             if (state is LoadingState) {
-              Navigator.of(context).pushNamed(Paymentgataway.routeName);
+              Navigator.of(context).pushNamed(
+                Paymentgataway.routeName,
+                arguments:
+                    FromTo(name: currentUser.name, koulId: currentUser.id),
+              );
             }
           },
           builder: (context, state) {
-            if (state is LoadingState) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
             return SafeArea(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,8 +136,9 @@ class _SelfTransferState extends State<SelfTransfer> {
             child: ElevatedButton.icon(
               onPressed: () async {
                 if (amountController.text.isEmpty ||
-                    (double.parse(amountController.text) * 100).toInt() < 1) {
-                  buildSnackBar(context, "payment must be at least ₹1");
+                    double.tryParse(amountController.text) == null ||
+                    double.parse(amountController.text) < 1) {
+                  buildSnackBar(context, "Payment must be at least ₹1");
                 } else {
                   context.read<StripeBloc>().add(AddFundEvent(
                       amount:

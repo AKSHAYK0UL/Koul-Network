@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:koul_network/UI/add_fund/other_account.dart';
 import 'package:koul_network/UI/add_fund/screen/self_transfer.dart';
 import 'package:koul_network/UI/global_widget/build_dialogbox.dart';
 import 'package:koul_network/UI/global_widget/snackbar_customwidget.dart';
@@ -156,7 +157,9 @@ class Home extends StatelessWidget {
                               screenSize.height * 0.0620)),
                     ),
                     TextButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(OtherAccount.routeName);
+                      },
                       icon: Icon(Icons.account_balance),
                       label: Text("Other Account"),
                       style: TextButton.styleFrom(

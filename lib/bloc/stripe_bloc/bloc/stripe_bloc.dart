@@ -73,8 +73,8 @@ class StripeBloc extends Bloc<StripeEvent, StripeState> {
               "txn_id": paymentIntent.id,
               "amount": paymentIntent.amount,
               "to": {
-                "name": currentUser.name,
-                "koul_id": currentUser.id,
+                "name": event.toName,
+                "koul_id": event.toKoulId,
               },
               "from": {
                 "name": currentUser.name,

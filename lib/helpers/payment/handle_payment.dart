@@ -22,7 +22,7 @@ void handlePayment(
     required CurrentuserKoulAccountSingleton currentKoulAccount}) async {
   final screenSize = MediaQuery.sizeOf(context);
 
-  bool isPositiveAmount = amount > 0;
+  bool isPositiveAmount = amount >= 1;
   bool isLowBalanceAlert = currentKoulAccount.accountLowBalanceAlertIs &&
       currentKoulAccount.accountLowBalanceAmountAlert >
           (currentKoulAccount.accountCurrentBalance - amount);
