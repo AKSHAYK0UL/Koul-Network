@@ -17,3 +17,9 @@ final class PaymentSheetEvent extends StripeEvent {
 }
 
 final class ProcessPaymentStateEvent extends StripeEvent {}
+
+final class PayeesDetailEvent extends StripeEvent {
+  final Payees payee;
+
+  PayeesDetailEvent({required this.payee});
+}

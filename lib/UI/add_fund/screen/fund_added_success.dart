@@ -128,9 +128,8 @@ class _FundAddedSuccessState extends State<FundAddedSuccess>
                         context
                             .read<KoulAccountBloc>()
                             .add(AccountBalanceEvent());
-                        Navigator.of(context).pop();
-                        Navigator.of(context).pop();
-                        Navigator.of(context).pop();
+                        Navigator.of(context)
+                            .popUntil((route) => route.isFirst);
                       },
                       rightButtonIcon: Icons.done,
                     ),

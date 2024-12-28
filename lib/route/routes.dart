@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:koul_network/UI/add_fund/other_account.dart';
+import 'package:koul_network/UI/add_fund/display_payees_info.dart';
+import 'package:koul_network/UI/add_fund/screen/other_account.dart';
 import 'package:koul_network/UI/add_fund/screen/fund_added_success.dart';
 import 'package:koul_network/UI/add_fund/screen/paymentgataway.dart';
 import 'package:koul_network/UI/add_fund/screen/self_transfer.dart';
@@ -80,8 +81,9 @@ Map<String, WidgetBuilder> routeTable = {
   AppPINKeypad.routeName: (context) => const AppPINKeypad(),
   Loading.routeName: (context) => const Loading(),
   Tabcontroller.routeName: (context) => const Tabcontroller(),
-  SelfTransfer.routeName: (context) => const SelfTransfer(),
+  TransferFund.routeName: (context) => const TransferFund(),
   FundAddedSuccess.routeName: (context) => const FundAddedSuccess(),
   Paymentgataway.routeName: (context) => const Paymentgataway(),
   OtherAccount.routeName: (context) => const OtherAccount(),
+  DisplayPayeesInfo.routeName: (context) => const DisplayPayeesInfo(),
 };

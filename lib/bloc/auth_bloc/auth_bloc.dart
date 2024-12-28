@@ -148,18 +148,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-//save the user data on the device[name,userid,email]
-  // Future<void> _saveuserinfo(
-  //     SaveUserInfoEvent event, Emitter<AuthState> emit) async {
-  //   try {
-  //     await Hive.box("auth").put("uid", event.userId);
-  //     await Hive.box("auth").put("token", event.authToken);
-  //     final x = event.authType.toString();
-  //     await Hive.box("auth").put("authtype", x);
-  //   } catch (_) {
-  //     print("SAVE USER INFO ERROR");
-  //   }
-  // }
   Future<void> _saveuserinfo(
       SaveUserInfoEvent event, Emitter<AuthState> emit) async {
     try {

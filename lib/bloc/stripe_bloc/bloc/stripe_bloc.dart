@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import "package:http/http.dart" as http;
+import 'package:koul_network/model/payee_detail.dart';
+import 'package:koul_network/model/payees.dart';
 import 'package:koul_network/secrets/api.dart';
 import 'package:koul_network/singleton/currentuser.dart';
 
@@ -17,6 +19,7 @@ class StripeBloc extends Bloc<StripeEvent, StripeState> {
   StripeBloc() : super(StripeInitial()) {
     on<AddFundEvent>(_addFund);
     on<PaymentSheetEvent>(_paymentSheet);
+    on<PayeesDetailEvent>(_payeeDetail);
   }
 
   Future<void> _addFund(AddFundEvent event, Emitter<StripeState> emit) async {
@@ -102,6 +105,37 @@ class StripeBloc extends Bloc<StripeEvent, StripeState> {
         emit(StripeInitial());
       } else {
         emit(ErrorState(errorMessage: e.error.message ?? "An error occurred."));
+      }
+    } catch (e) {
+      emit(ErrorState(errorMessage: e.toString()));
+    }
+  }
+
+  Future<void> _payeeDetail(
+      PayeesDetailEvent event, Emitter<StripeState> emit) async {
+    final currentUser = CurrentUserSingleton.getCurrentUserInstance();
+
+    emit(LoadingState());
+    try {
+      final payeeExistRoute = Uri.parse("$url/payee-account-exist");
+      final response = await http.post(
+        payeeExistRoute,
+        headers: {"Authorization": currentUser.authToken},
+        body: json.encode(
+          {
+            "userid": currentUser.id,
+            "koul_id": event.payee.koulId,
+            "account_holder_email": event.payee.email,
+            "account_holder_name": event.payee.name,
+          },
+        ),
+      );
+      if (response.statusCode == HttpStatus.ok) {
+        final payeesData = PayeeDetail.fromJson(jsonDecode(response.body));
+
+        emit(PayeesDetailState(payeeDetail: payeesData));
+      } else {
+        emit(ErrorState(errorMessage: response.body.toString()));
       }
     } catch (e) {
       emit(ErrorState(errorMessage: e.toString()));

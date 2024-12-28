@@ -6,18 +6,16 @@ import 'package:koul_network/UI/home/pay_to_koul_id/widgets/amount_textfield.dar
 import 'package:koul_network/bloc/stripe_bloc/bloc/stripe_bloc.dart';
 import 'package:koul_network/main.dart';
 import 'package:koul_network/model/koul_account/from_to.dart';
-import 'package:koul_network/singleton/currentuser.dart';
 
-class SelfTransfer extends StatefulWidget {
-  static const routeName = "SelfTransfer";
-  const SelfTransfer({super.key});
+class TransferFund extends StatefulWidget {
+  static const routeName = "TransferFund";
+  const TransferFund({super.key});
   @override
-  State<SelfTransfer> createState() => _SelfTransferState();
+  State<TransferFund> createState() => _TransferFundState();
 }
 
-class _SelfTransferState extends State<SelfTransfer> {
+class _TransferFundState extends State<TransferFund> {
   final amountController = TextEditingController();
-  final currentUser = CurrentUserSingleton.getCurrentUserInstance();
 
   @override
   void dispose() {
@@ -28,6 +26,10 @@ class _SelfTransferState extends State<SelfTransfer> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.sizeOf(context);
+    final routeData =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
+    final koulId = routeData["koul_id"] as String;
+    final name = routeData["name"] as String;
 
     return PopScope(
       child: Scaffold(
@@ -41,8 +43,7 @@ class _SelfTransferState extends State<SelfTransfer> {
             if (state is LoadingState) {
               Navigator.of(context).pushNamed(
                 Paymentgataway.routeName,
-                arguments:
-                    FromTo(name: currentUser.name, koulId: currentUser.id),
+                arguments: FromTo(name: name, koulId: koulId),
               );
             }
           },
@@ -77,7 +78,7 @@ class _SelfTransferState extends State<SelfTransfer> {
                             backgroundColor:
                                 const Color.fromARGB(135, 15, 14, 14),
                             child: Text(
-                              currentUser.name.toString().toUpperCase()[0],
+                              name.toString().toUpperCase()[0],
                               style: Theme.of(context).textTheme.headlineMedium,
                             ),
                           ),
@@ -88,7 +89,7 @@ class _SelfTransferState extends State<SelfTransfer> {
                             fit: BoxFit.scaleDown,
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              "Adding Funds To ${currentUser.name.replaceFirst(currentUser.name[0], currentUser.name[0].toUpperCase())}",
+                              "Adding Funds To ${name.replaceFirst(name[0], name[0].toUpperCase())}",
                               style: Theme.of(context).textTheme.bodyMedium,
                               overflow: TextOverflow.visible,
                               maxLines: 1,
@@ -101,7 +102,7 @@ class _SelfTransferState extends State<SelfTransfer> {
                             fit: BoxFit.scaleDown,
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              currentUser.id,
+                              koulId,
                               style: Theme.of(context).textTheme.bodySmall,
                               overflow: TextOverflow.visible,
                               maxLines: 1,

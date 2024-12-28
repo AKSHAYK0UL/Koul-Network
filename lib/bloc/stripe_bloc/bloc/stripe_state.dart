@@ -22,3 +22,9 @@ final class TransactionDoneState extends StripeState {
 
   TransactionDoneState({required this.txnId, required this.amount});
 }
+
+final class PayeesDetailState extends StripeState {
+  final PayeeDetail payeeDetail;
+
+  PayeesDetailState({required this.payeeDetail});
+}

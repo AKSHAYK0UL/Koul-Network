@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:koul_network/UI/add_fund/other_account.dart';
+import 'package:koul_network/UI/add_fund/screen/other_account.dart';
 import 'package:koul_network/UI/add_fund/screen/self_transfer.dart';
 import 'package:koul_network/UI/global_widget/build_dialogbox.dart';
 import 'package:koul_network/UI/global_widget/snackbar_customwidget.dart';
@@ -21,6 +21,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.sizeOf(context);
     final state = context.read<AuthBloc>().state as UserInfoState;
+
     return ColoredBox(
       color: const Color.fromARGB(255, 44, 43, 43),
       child: SafeArea(
@@ -148,7 +149,13 @@ class Home extends StatelessWidget {
                   children: [
                     TextButton.icon(
                       onPressed: () {
-                        Navigator.of(context).pushNamed(SelfTransfer.routeName);
+                        Navigator.of(context).pushNamed(
+                          TransferFund.routeName,
+                          arguments: {
+                            "koul_id": state.userId,
+                            "name": state.userName
+                          },
+                        );
                       },
                       icon: Icon(Icons.loop),
                       label: Text("Self Transfer"),
