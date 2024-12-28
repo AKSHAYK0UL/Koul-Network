@@ -26,10 +26,7 @@ class _TransferFundState extends State<TransferFund> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.sizeOf(context);
-    final routeData =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
-    final koulId = routeData["koul_id"] as String;
-    final name = routeData["name"] as String;
+    final routeData = ModalRoute.of(context)?.settings.arguments as FromTo;
 
     return PopScope(
       child: Scaffold(
@@ -43,7 +40,8 @@ class _TransferFundState extends State<TransferFund> {
             if (state is LoadingState) {
               Navigator.of(context).pushNamed(
                 Paymentgataway.routeName,
-                arguments: FromTo(name: name, koulId: koulId),
+                arguments:
+                    FromTo(name: routeData.name, koulId: routeData.koulId),
               );
             }
           },
@@ -78,7 +76,7 @@ class _TransferFundState extends State<TransferFund> {
                             backgroundColor:
                                 const Color.fromARGB(135, 15, 14, 14),
                             child: Text(
-                              name.toString().toUpperCase()[0],
+                              routeData.name.toString().toUpperCase()[0],
                               style: Theme.of(context).textTheme.headlineMedium,
                             ),
                           ),
@@ -89,7 +87,7 @@ class _TransferFundState extends State<TransferFund> {
                             fit: BoxFit.scaleDown,
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              "Adding Funds To ${name.replaceFirst(name[0], name[0].toUpperCase())}",
+                              "Adding Funds To ${routeData.name.replaceFirst(routeData.name[0], routeData.name[0].toUpperCase())}",
                               style: Theme.of(context).textTheme.bodyMedium,
                               overflow: TextOverflow.visible,
                               maxLines: 1,
@@ -102,7 +100,7 @@ class _TransferFundState extends State<TransferFund> {
                             fit: BoxFit.scaleDown,
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              koulId,
+                              routeData.koulId,
                               style: Theme.of(context).textTheme.bodySmall,
                               overflow: TextOverflow.visible,
                               maxLines: 1,

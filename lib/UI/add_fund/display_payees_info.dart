@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:koul_network/UI/add_fund/screen/self_transfer.dart';
+import 'package:koul_network/UI/add_fund/screen/fund_transfer.dart';
 import 'package:koul_network/UI/home/more/widget/user_info.dart';
 import 'package:koul_network/bloc/stripe_bloc/bloc/stripe_bloc.dart';
 import 'package:koul_network/helpers/helper_functions/phone_formatter.dart';
+import 'package:koul_network/model/koul_account/from_to.dart';
 import 'package:lottie/lottie.dart';
 
 class DisplayPayeesInfo extends StatefulWidget {
@@ -34,7 +35,7 @@ class _DisplayPayeesInfoState extends State<DisplayPayeesInfo> {
         children: [
           Lottie.asset(
             "assets/account.json",
-            height: screenSize.height * 0.280,
+            height: screenSize.height * 0.260,
             alignment: Alignment.center,
             repeat: false,
           ),
@@ -91,21 +92,19 @@ class _DisplayPayeesInfoState extends State<DisplayPayeesInfo> {
       persistentFooterButtons: [
         TextButton.icon(
           onPressed: () {
-            Navigator.of(context).pushNamed(
-              TransferFund.routeName,
-              arguments: {
-                "koul_id": routeData.payeeDetail.koulId,
-                "name": routeData.payeeDetail.name
-              },
-            );
+            Navigator.of(context).pushNamed(TransferFund.routeName,
+                arguments: FromTo(
+                    name: routeData.payeeDetail.name,
+                    koulId: routeData.payeeDetail.koulId));
           },
-          label: Text("Proceed"),
+          label: Text("Next"),
           icon: Icon(Icons.forward),
           style: TextButton.styleFrom(
-              fixedSize: Size(
-            screenSize.height * 1,
-            screenSize.height * 0.071,
-          )),
+            fixedSize: Size(
+              screenSize.height * 1,
+              screenSize.height * 0.071,
+            ),
+          ),
         )
       ],
     );

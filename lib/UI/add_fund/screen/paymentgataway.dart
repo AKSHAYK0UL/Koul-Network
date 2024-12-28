@@ -13,8 +13,7 @@ class Paymentgataway extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final routeData = ModalRoute.of(context)?.settings.arguments as FromTo;
-    final toName = routeData.name;
-    final toKoulId = routeData.koulId;
+
     return Scaffold(
       body: SafeArea(
         child: BlocConsumer<StripeBloc, StripeState>(
@@ -24,15 +23,18 @@ class Paymentgataway extends StatelessWidget {
             }
             if (state is SuccessState) {
               context.read<StripeBloc>().add(PaymentSheetEvent(
-                    toName: toName,
-                    toKoulId: toKoulId,
+                    toName: routeData.name,
+                    toKoulId: routeData.koulId,
                     clientId: state.clientId,
                   ));
             }
             if (state is TransactionDoneState) {
-              Navigator.of(context).pushReplacementNamed(
-                  FundAddedSuccess.routeName,
-                  arguments: state);
+              Navigator.of(context)
+                  .pushReplacementNamed(FundAddedSuccess.routeName, arguments: {
+                "toname": routeData.name,
+                "tokoulid": routeData.koulId,
+                "state": state,
+              });
             }
             if (state is StripeInitial) {
               Navigator.of(context)

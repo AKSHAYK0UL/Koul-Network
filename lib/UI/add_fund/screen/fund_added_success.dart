@@ -56,8 +56,11 @@ class _FundAddedSuccessState extends State<FundAddedSuccess>
   final currentUser = CurrentUserSingleton.getCurrentUserInstance();
   @override
   Widget build(BuildContext context) {
-    final txnData =
-        ModalRoute.of(context)!.settings.arguments as TransactionDoneState;
+    final routeData =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final toName = routeData["toname"] as String;
+    final toKoulId = routeData["tokoulid"] as String;
+    final paymentState = routeData["state"] as TransactionDoneState;
 
     final screenSize = MediaQuery.sizeOf(context);
 
@@ -97,7 +100,7 @@ class _FundAddedSuccessState extends State<FundAddedSuccess>
                                 height: screenSize.height * 0.0264,
                               ),
                               Text(
-                                "₹${txnData.amount.toStringAsFixed(2)}",
+                                "₹${paymentState.amount.toStringAsFixed(2)}",
                                 style: TextStyle(
                                   fontSize: screenSize.height * 0.0558,
                                   fontWeight: FontWeight.normal,
@@ -114,15 +117,14 @@ class _FundAddedSuccessState extends State<FundAddedSuccess>
                     child: buildTransactionDetailBox(
                       context: context,
                       transactionData: Transaction(
-                          amount: txnData.amount,
-                          to: FromTo(
-                              name: currentUser.name, koulId: currentUser.id),
+                          amount: paymentState.amount,
+                          to: FromTo(name: toName, koulId: toKoulId),
                           from: FromTo(
                               name: currentUser.name, koulId: currentUser.id),
                           date: DateTime.now(),
                           transactionStatus: true,
                           transactionType: "fund",
-                          transactionId: txnData.txnId),
+                          transactionId: paymentState.txnId),
                       rightButtonText: "Done",
                       rightButtonFun: () {
                         context
