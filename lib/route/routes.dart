@@ -26,6 +26,7 @@ import 'package:koul_network/UI/home/more/screen/account_setting.dart';
 import 'package:koul_network/UI/home/more/screen/account_setting/reset_password.dart';
 import 'package:koul_network/UI/home/more/screen/app_pin_setting/app_pin_setting.dart';
 import 'package:koul_network/UI/home/more/screen/app_pin_setting/processing/loading.dart';
+import 'package:koul_network/UI/home/more/screen/fund_txn/fund_txn.dart';
 import 'package:koul_network/UI/home/more/screen/privacy.dart';
 import 'package:koul_network/UI/home/pay_to_contacts/screen/contacts_list.dart';
 import 'package:koul_network/UI/home/pay_to_koul_id/screens/pay_koulid.dart';
@@ -39,6 +40,7 @@ import 'package:koul_network/UI/home/screens/navbar_screen.dart';
 import 'package:koul_network/UI/home/screens/transactions.dart';
 import 'package:koul_network/UI/home/usage/screens/ai_report.dart';
 import 'package:koul_network/UI/home/usage/screens/usage_detail/tabcontroller.dart';
+import 'package:koul_network/model/fund.dart';
 
 //routes table
 Map<String, WidgetBuilder> routeTable = {
@@ -86,4 +88,5 @@ Map<String, WidgetBuilder> routeTable = {
   Paymentgataway.routeName: (context) => const Paymentgataway(),
   OtherAccount.routeName: (context) => const OtherAccount(),
   DisplayPayeesInfo.routeName: (context) => const DisplayPayeesInfo(),
+  FundTxn.routeName: (context) => const FundTxn(),
 };

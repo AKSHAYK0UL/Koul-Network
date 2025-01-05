@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:koul_network/UI/auth/widgets/hasUserData_OrNot.dart';
+import 'package:koul_network/UI/nsc/screen/checknsc.dart';
 
 import 'package:koul_network/bloc/auth_bloc/auth_bloc.dart';
 import 'package:koul_network/bloc/koul_account_bloc/koul_account_bloc/koul_account_bloc.dart';
@@ -54,7 +54,8 @@ class Koul extends StatelessWidget {
         title: "Koul Network",
         debugShowCheckedModeBanner: false,
         theme: themeDATA(context),
-        home: const HasUserDataOrNot(),
+        // home: const HasUserDataOrNot(),
+        home: CheckNSC(),
         routes: routeTable,
       ),
     );

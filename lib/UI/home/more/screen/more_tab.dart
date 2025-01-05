@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:koul_network/UI/home/check_balance/screens/checkbalance.dart';
 import 'package:koul_network/UI/home/more/screen/account_info.dart';
 import 'package:koul_network/UI/home/more/screen/account_setting.dart';
+import 'package:koul_network/UI/home/more/screen/fund_txn/fund_txn.dart';
 import 'package:koul_network/UI/home/more/screen/privacy.dart';
 import 'package:koul_network/UI/home/more/widget/build_tiles.dart';
 import 'package:koul_network/helpers/helper_functions/logout/logout_func.dart';
@@ -54,6 +55,14 @@ class MoreTab extends StatelessWidget {
             icon: Icons.account_balance,
             onTap: () {
               Navigator.of(context).pushNamed(CheckbalanceScreen.routeName);
+            },
+          ),
+          buildTiles(
+            context: context,
+            text: "Funds TXN",
+            icon: Icons.money,
+            onTap: () {
+              Navigator.of(context).pushNamed(FundTxn.routeName);
             },
           ),
           buildTiles(

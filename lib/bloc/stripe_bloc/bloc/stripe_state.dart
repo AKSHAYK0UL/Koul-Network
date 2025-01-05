@@ -28,3 +28,8 @@ final class PayeesDetailState extends StripeState {
 
   PayeesDetailState({required this.payeeDetail});
 }
+
+final class FundTXNState extends StripeState {
+  List<Fund> fundTxnList = [];
+  FundTXNState({required this.fundTxnList});
+}

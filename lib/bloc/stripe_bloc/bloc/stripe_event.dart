@@ -23,3 +23,5 @@ final class PayeesDetailEvent extends StripeEvent {
 
   PayeesDetailEvent({required this.payee});
 }
+
+final class GetFundsTXNList extends StripeEvent {}

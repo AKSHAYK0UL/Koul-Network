@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import "package:http/http.dart" as http;
+import 'package:koul_network/model/fund.dart';
 import 'package:koul_network/model/payee_detail.dart';
 import 'package:koul_network/model/payees.dart';
 import 'package:koul_network/secrets/api.dart';
@@ -13,13 +14,14 @@ part 'stripe_event.dart';
 part 'stripe_state.dart';
 
 class StripeBloc extends Bloc<StripeEvent, StripeState> {
-  // final url = "http://10.0.2.2:8000";
-  final url = KOUL_SERVICE_API_URL;
+  final url = "http://10.0.2.2:8000";
+  // final url = KOUL_SERVICE_API_URL;
 
   StripeBloc() : super(StripeInitial()) {
     on<AddFundEvent>(_addFund);
     on<PaymentSheetEvent>(_paymentSheet);
     on<PayeesDetailEvent>(_payeeDetail);
+    on<GetFundsTXNList>(_getFundsTXNList);
   }
 
   Future<void> _addFund(AddFundEvent event, Emitter<StripeState> emit) async {
@@ -139,6 +141,49 @@ class StripeBloc extends Bloc<StripeEvent, StripeState> {
       }
     } catch (e) {
       emit(ErrorState(errorMessage: e.toString()));
+    }
+  }
+
+  Future<void> _getFundsTXNList(
+      GetFundsTXNList event, Emitter<StripeState> emit) async {
+    final currentUser = CurrentUserSingleton.getCurrentUserInstance();
+
+    final fundTXNRoute = "$url/get-fund-data";
+    emit(LoadingState());
+    try {
+      final response = await http.post(
+        Uri.parse(fundTXNRoute),
+        headers: {"Authorization": currentUser.authToken},
+        body: json.encode(
+          {
+            "userid": currentUser.id,
+            "koul_id": currentUser.id,
+            "name": currentUser.name,
+          },
+        ),
+      );
+      print(response.body);
+      if (response.statusCode == HttpStatus.ok) {
+        List<dynamic> rawData = json.decode(response.body);
+        print("RAW DATA :$rawData");
+        final List<Fund> fundTxnList =
+            rawData.map((rd) => Fund.fromJson(rd)).toList();
+        emit(
+          FundTXNState(fundTxnList: fundTxnList),
+        );
+      } else {
+        emit(
+          ErrorState(
+            errorMessage: response.body.toString(),
+          ),
+        );
+      }
+    } catch (e) {
+      emit(
+        ErrorState(
+          errorMessage: e.toString(),
+        ),
+      );
     }
   }
 }
