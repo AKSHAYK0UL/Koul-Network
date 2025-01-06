@@ -59,7 +59,7 @@ class MoreTab extends StatelessWidget {
           ),
           buildTiles(
             context: context,
-            text: "Funds TXN",
+            text: "Funds transactions",
             icon: Icons.money,
             onTap: () {
               Navigator.of(context).pushNamed(FundTxn.routeName);

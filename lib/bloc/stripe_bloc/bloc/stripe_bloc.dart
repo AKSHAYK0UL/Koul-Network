@@ -14,8 +14,8 @@ part 'stripe_event.dart';
 part 'stripe_state.dart';
 
 class StripeBloc extends Bloc<StripeEvent, StripeState> {
-  final url = "http://10.0.2.2:8000";
-  // final url = KOUL_SERVICE_API_URL;
+  // final url = "http://10.0.2.2:8000";
+  final url = KOUL_SERVICE_API_URL;
 
   StripeBloc() : super(StripeInitial()) {
     on<AddFundEvent>(_addFund);

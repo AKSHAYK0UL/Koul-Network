@@ -189,8 +189,8 @@ class _TransactionsState extends State<Transactions> with RouteAware {
                                 fit: BoxFit.scaleDown,
                                 child: Text(
                                   tData.transactionType == "credit"
-                                      ? "+ ₹${tData.amount.toString()}"
-                                      : "₹${tData.amount.toString()}",
+                                      ? "+ ₹${tData.amount.toStringAsFixed(2)}"
+                                      : "₹${tData.amount.toStringAsFixed(2)}",
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyMedium!
