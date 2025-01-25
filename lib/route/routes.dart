@@ -40,7 +40,6 @@ import 'package:koul_network/UI/home/screens/navbar_screen.dart';
 import 'package:koul_network/UI/home/screens/transactions.dart';
 import 'package:koul_network/UI/home/usage/screens/ai_report.dart';
 import 'package:koul_network/UI/home/usage/screens/usage_detail/tabcontroller.dart';
-import 'package:koul_network/model/fund.dart';
 
 //routes table
 Map<String, WidgetBuilder> routeTable = {

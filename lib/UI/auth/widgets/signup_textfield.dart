@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bulleted_list/bulleted_list.dart';
 import 'package:koul_network/UI/auth/screens/signin.dart';
+import 'package:koul_network/helpers/helper_functions/password_checker.dart';
 import 'package:koul_network/helpers/helper_functions/show_model_sheet.dart';
 import 'package:koul_network/helpers/helper_functions/sim_info.dart';
 import 'package:koul_network/model/auth_request_signup.dart';
@@ -316,8 +317,9 @@ Widget buildTextFieldSignUp({
           ),
           TextFormField(
             validator: (value) {
-              if (value!.isEmpty) {
-                return 'Enter password';
+              final pass = checkPassword(value!);
+              if (!pass.isValid) {
+                return pass.message;
               }
               return null;
             },

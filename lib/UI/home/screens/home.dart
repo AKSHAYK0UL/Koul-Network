@@ -11,7 +11,6 @@ import 'package:koul_network/UI/home/pay_to_phone/pay_to_phone.dart';
 import 'package:koul_network/UI/home/widgets/menu_options.dart';
 import 'package:koul_network/UI/home/widgets/user_card.dart';
 import 'package:koul_network/bloc/auth_bloc/auth_bloc.dart';
-import 'package:koul_network/bloc/stripe_bloc/bloc/stripe_bloc.dart';
 import 'package:koul_network/helpers/helper_functions/greeting.dart';
 import 'package:koul_network/model/koul_account/from_to.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';

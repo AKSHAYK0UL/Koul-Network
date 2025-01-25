@@ -108,7 +108,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         return;
       }
     } catch (e) {
-      emit(AuthFaliueState("something went wrong"));
+      emit(AuthFaliueState("error: ${e.toString()}"));
       return;
     }
   }
