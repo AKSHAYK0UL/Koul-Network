@@ -46,7 +46,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<ForgotVerifyEvent>(_forgetPasswordverify);
     on<GoogleSignAuthEvent>(_googleSignAuth); //signin/up with google
     on<GoogleLoginAuthEvent>(_googleLoginAuth); //login with google
-    on<GoogleSignOutEvent>(_googleSiginOutAuth); //signOut goofle
+    on<GoogleSignOutEvent>(_googleSiginOutAuth); //signOut google
     on<SecureSignUpEvent>(_secureSignUp); //create account using secure session
     on<SecureSignUpverifyEvent>(_secureSignUpVerify); //verify vcode
     on<SecureSignInEvent>(_secureSignIn);

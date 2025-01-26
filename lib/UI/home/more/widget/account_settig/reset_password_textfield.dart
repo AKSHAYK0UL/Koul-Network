@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:koul_network/bloc/auth_bloc/auth_bloc.dart';
+import 'package:koul_network/helpers/helper_functions/password_checker.dart';
 import 'package:koul_network/model/auth_request_signup.dart';
 import 'package:koul_network/singleton/currentuser.dart';
 import 'package:loading_indicator/loading_indicator.dart';
@@ -47,79 +48,13 @@ Widget buildResetpasswordTextField({
       key: _formkey,
       child: Column(
         children: [
-          // TextFormField(
-          //   validator: (value) {
-          //     if (value!.isEmpty) {
-          //       return 'Enter email';
-          //     }
-          //     return null;
-          //   },
-          //   decoration: InputDecoration(
-          //     contentPadding:
-          //         EdgeInsets.symmetric(vertical: screenSize.height * 0.02),
-          //     hintText: 'Email',
-          //     hintStyle: Theme.of(context).textTheme.titleMedium,
-          //     prefixIcon: Icon(
-          //       Icons.email,
-          //       color: Theme.of(context).textTheme.titleMedium!.color,
-          //     ),
-          //     border: OutlineInputBorder(
-          //       borderRadius: BorderRadius.circular(10),
-          //       borderSide: BorderSide(
-          //         color: Colors.grey.shade500,
-          //         width: 2,
-          //       ),
-          //     ),
-          //     enabledBorder: OutlineInputBorder(
-          //       borderRadius: BorderRadius.circular(10),
-          //       borderSide: BorderSide(
-          //         color: Colors.grey.shade500,
-          //         width: 2,
-          //       ),
-          //     ),
-          //     focusedBorder: OutlineInputBorder(
-          //       borderRadius: BorderRadius.circular(10),
-          //       borderSide: const BorderSide(
-          //         color: Colors.white,
-          //         width: 2,
-          //       ),
-          //     ),
-          //     errorBorder: OutlineInputBorder(
-          //       borderRadius: BorderRadius.circular(10),
-          //       borderSide: const BorderSide(
-          //         color: Colors.orange,
-          //         width: 2,
-          //       ),
-          //     ),
-          //     focusedErrorBorder: OutlineInputBorder(
-          //       borderRadius: BorderRadius.circular(10),
-          //       borderSide: const BorderSide(
-          //         color: Colors.orange,
-          //         width: 2,
-          //       ),
-          //     ),
-          //     errorStyle: const TextStyle(color: Colors.orange),
-          //   ),
-          //   cursorRadius: const Radius.circular(0),
-          //   keyboardType: TextInputType.emailAddress,
-          //   autofocus: false,
-          //   textInputAction: TextInputAction.next,
-          //   focusNode: _emailFocusNode,
-          //   onEditingComplete: () {
-          //     FocusScope.of(context).requestFocus(_passwordFocusNode);
-          //   },
-          //   onSaved: (newValue) {
-          //     authobj.userEmail = newValue!;
-          //   },
-          // ),
-          // SizedBox(
-          //   height: screenSize.height * 0.02,
-          // ),
           TextFormField(
             validator: (value) {
-              if (value!.isEmpty) {
-                return 'Enter password';
+              final pass = checkPassword(value!);
+              if (!pass.isValid) {
+                return pass.message;
               }
+
               return null;
             },
             obscureText: !password(),

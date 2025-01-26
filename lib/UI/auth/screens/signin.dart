@@ -128,7 +128,7 @@ class _SignInScreenState extends State<SignInScreen>
                   Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: screenSize.width * 0.020),
-                    child: BuildTextFieldSignIn(
+                    child: buildTextFieldSignIn(
                       context: context,
                       password: passwordVisibility,
                     ),

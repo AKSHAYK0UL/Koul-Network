@@ -18,7 +18,7 @@ Future<void> _onSignInPressed(BuildContext context, SignInClass authobj) async {
       userEmail: authobj.userEmail, password: authobj.password));
 }
 
-Widget BuildTextFieldSignIn({
+Widget buildTextFieldSignIn({
   required BuildContext context,
   required bool Function() password,
 }) {
