@@ -2,7 +2,7 @@
 
 <table>
   <tr>
-    <td align="center" style="padding: 20px;">
+    <td align="center" style="padding: 200px;">
       <img src="https://github.com/user-attachments/assets/e79556b3-defc-4564-8ea9-ffbd80e3fb82" alt="KOUL-NETWORK App Screenshot 1" width="300" />
     </td>
     <td align="center" style="padding: 20px;">
