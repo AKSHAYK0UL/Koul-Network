@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:koul_network/bloc/auth_bloc/auth_bloc.dart';
-import 'package:koul_network/helpers/helper_functions/password_checker.dart';
+import 'package:koul_network/core/helpers/helper_functions/password_checker.dart';
 import 'package:koul_network/model/auth_request_signup.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:koul_network/UI/home/cross%20screen/widget/transaction_detail.dart';
-import 'package:koul_network/enums/show_phone.dart';
-import 'package:koul_network/helpers/helper_functions/phone_formatter.dart';
-import 'package:koul_network/helpers/utc_to_ist.dart';
+import 'package:koul_network/core/enums/show_phone.dart';
+import 'package:koul_network/core/helpers/helper_functions/phone_formatter.dart';
+import 'package:koul_network/core/helpers/utc_to_ist.dart';
 import 'package:koul_network/model/koul_account/transaction.dart';
-import 'package:koul_network/singleton/currentuser.dart';
+import 'package:koul_network/core/singleton/currentuser.dart';
 
 class TransactionDetailScreen extends StatelessWidget {
   static const routeName = "TransactionDetailScreen";
@@ -70,7 +70,7 @@ class TransactionDetailScreen extends StatelessWidget {
                 height: screenSize.height * 0.013,
               ),
               Text(
-                "₹${transactionData.amount}",
+                transactionData.amount.toStringAsFixed(2),
                 style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                       fontSize: screenSize.height * 0.0590,
                       fontWeight: FontWeight.w400,

@@ -9,9 +9,9 @@ import 'package:koul_network/bloc/auth_bloc/auth_bloc.dart';
 import 'package:koul_network/bloc/koul_account_bloc/koul_account_bloc/koul_account_bloc.dart';
 import 'package:koul_network/bloc/stripe_bloc/bloc/stripe_bloc.dart';
 import 'package:koul_network/model/contact.dart';
-import 'package:koul_network/route/routes.dart';
+import 'package:koul_network/core/route/routes.dart';
 import 'package:koul_network/secrets/api.dart';
-import 'package:koul_network/theme/theme.dart';
+import 'package:koul_network/core/theme/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

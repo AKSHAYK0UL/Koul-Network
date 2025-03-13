@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:koul_network/UI/home/more/screen/app_pin_setting/processing/loading.dart';
 import 'package:koul_network/bloc/auth_bloc/auth_bloc.dart';
-import 'package:koul_network/enums/app_pin_settting.dart';
+import 'package:koul_network/core/enums/app_pin_settting.dart';
 
 class AppPINKeypad extends StatefulWidget {
   static const routeName = "AppPINKeypad";

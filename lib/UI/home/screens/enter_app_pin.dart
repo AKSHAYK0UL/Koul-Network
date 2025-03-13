@@ -4,9 +4,9 @@ import 'package:koul_network/UI/home/more/screen/AppPinkeypad.dart';
 import 'package:koul_network/UI/home/more/screen/more_tab.dart';
 import 'package:koul_network/UI/home/screens/navbar_screen.dart';
 import 'package:koul_network/bloc/auth_bloc/auth_bloc.dart';
-import 'package:koul_network/enums/enter_pin_options.dart';
-import 'package:koul_network/helpers/auth_bio_pin.dart';
-import 'package:koul_network/singleton/currentuser.dart';
+import 'package:koul_network/core/enums/enter_pin_options.dart';
+import 'package:koul_network/core/helpers/auth_bio_pin.dart';
+import 'package:koul_network/core/singleton/currentuser.dart';
 
 class EnterAppPIN extends StatefulWidget {
   const EnterAppPIN({super.key});

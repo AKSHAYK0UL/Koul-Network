@@ -4,8 +4,8 @@ import 'package:koul_network/UI/global_widget/snackbar_customwidget.dart';
 import 'package:koul_network/UI/home/cross%20screen/screen/transaction_pin.dart';
 import 'package:koul_network/UI/home/cross%20screen/widget/show_alert_dialog.dart';
 import 'package:koul_network/UI/home/pay_to_koul_id/widgets/showmodelsheet_on_payment_error.dart';
-import 'package:koul_network/enums/route_pay_pin.dart';
-import 'package:koul_network/singleton/currentuser_account.dart';
+import 'package:koul_network/core/enums/route_pay_pin.dart';
+import 'package:koul_network/core/singleton/currentuser_account.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 List<String> steps = [

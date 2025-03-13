@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:koul_network/UI/home/check_balance/screens/checkbalance.dart';
 import 'package:koul_network/bloc/koul_account_bloc/koul_account_bloc/koul_account_bloc.dart';
-import 'package:koul_network/errors/payment_errors.dart';
+import 'package:koul_network/core/errors/payment_errors.dart';
 
 //Insufficient Funds
 //transaction failed

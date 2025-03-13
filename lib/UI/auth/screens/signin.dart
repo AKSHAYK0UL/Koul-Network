@@ -4,7 +4,7 @@ import 'package:koul_network/UI/auth/widgets/signin_textfield.dart';
 import 'package:koul_network/UI/global_widget/snackbar_customwidget.dart';
 import 'package:koul_network/UI/home/screens/home_screen.dart';
 import 'package:koul_network/bloc/auth_bloc/auth_bloc.dart';
-import 'package:koul_network/enums/auth_type_enum.dart';
+import 'package:koul_network/core/enums/auth_type_enum.dart';
 
 // ignore: must_be_immutable
 class SignInScreen extends StatefulWidget {

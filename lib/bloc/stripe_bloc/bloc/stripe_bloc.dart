@@ -8,7 +8,7 @@ import 'package:koul_network/model/fund.dart';
 import 'package:koul_network/model/payee_detail.dart';
 import 'package:koul_network/model/payees.dart';
 import 'package:koul_network/secrets/api.dart';
-import 'package:koul_network/singleton/currentuser.dart';
+import 'package:koul_network/core/singleton/currentuser.dart';
 
 part 'stripe_event.dart';
 part 'stripe_state.dart';

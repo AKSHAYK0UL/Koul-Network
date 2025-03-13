@@ -5,7 +5,7 @@ import 'package:koul_network/UI/home/more/screen/account_setting.dart';
 import 'package:koul_network/UI/home/more/screen/fund_txn/fund_txn.dart';
 import 'package:koul_network/UI/home/more/screen/privacy.dart';
 import 'package:koul_network/UI/home/more/widget/build_tiles.dart';
-import 'package:koul_network/helpers/helper_functions/logout/logout_func.dart';
+import 'package:koul_network/core/helpers/helper_functions/logout/logout_func.dart';
 
 class MoreTab extends StatelessWidget {
   const MoreTab({super.key});
@@ -59,7 +59,7 @@ class MoreTab extends StatelessWidget {
           ),
           buildTiles(
             context: context,
-            text: "Funds transactions",
+            text: "Stripe transactions",
             icon: Icons.money,
             onTap: () {
               Navigator.of(context).pushNamed(FundTxn.routeName);

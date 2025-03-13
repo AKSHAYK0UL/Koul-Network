@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:koul_network/UI/home/more/screen/account_setting/reset_password.dart';
 import 'package:koul_network/UI/home/more/screen/app_pin_setting/app_pin_setting.dart';
 import 'package:koul_network/UI/home/more/widget/build_tiles.dart';
-import 'package:koul_network/helpers/auth_bio_pin.dart';
+import 'package:koul_network/core/helpers/auth_bio_pin.dart';
 import 'package:koul_network/main.dart';
-import 'package:koul_network/singleton/currentuser.dart';
+import 'package:koul_network/core/singleton/currentuser.dart';
 
 class AccountSetting extends StatefulWidget {
   static const routeName = "AccountSetting";

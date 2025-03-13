@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:koul_network/bloc/auth_bloc/auth_bloc.dart';
 import 'package:koul_network/bloc/koul_account_bloc/koul_account_bloc/koul_account_bloc.dart';
-import 'package:koul_network/enums/auth_type_enum.dart';
-import 'package:koul_network/singleton/currentuser.dart';
-import 'package:koul_network/singleton/currentuser_account.dart';
+import 'package:koul_network/core/enums/auth_type_enum.dart';
+import 'package:koul_network/core/singleton/currentuser.dart';
+import 'package:koul_network/core/singleton/currentuser_account.dart';
 
 Future<void> logOut(BuildContext context) async {
   String? authType;

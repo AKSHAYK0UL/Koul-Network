@@ -6,14 +6,14 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-import 'package:koul_network/enums/app_pin_settting.dart';
-import 'package:koul_network/enums/auth_type_enum.dart';
-import 'package:koul_network/helpers/helper_functions/trim_phno.dart';
+import 'package:koul_network/core/enums/app_pin_settting.dart';
+import 'package:koul_network/core/enums/auth_type_enum.dart';
+import 'package:koul_network/core/helpers/helper_functions/trim_phno.dart';
 import 'package:koul_network/model/contact.dart';
 import 'package:koul_network/model/rverify_response.dart';
 import 'package:koul_network/model/signup_response.dart';
 import 'package:koul_network/secrets/api.dart';
-import 'package:koul_network/singleton/currentuser.dart';
+import 'package:koul_network/core/singleton/currentuser.dart';
 import 'package:koul_network/model/user_info.dart';
 
 part 'auth_event.dart';
@@ -330,13 +330,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoadingState());
     try {
       final forgetroute = Uri.parse("$url/reset");
+      print("FORGOT PASSWORD ${event.password.trim()}");
       final response = await http.post(forgetroute,
           body: json.encode({
             "useremail": event.userEmail,
-            "password": event.password,
+            "password": event.password.trim(),
           }));
+      print("RESPONSE FORGOT :${response.body.toString()}");
       final responseBodyString = response.body.toString();
       verifyData? signuprer;
+      print("RESPONSE FORGOT :${response.body.toString()}");
 
       if (!responseBodyString.contains("no user found(middleware)")) {
         Map<String, dynamic> data = jsonDecode(response.body);

@@ -4,9 +4,9 @@ import 'package:hive/hive.dart';
 import 'package:koul_network/UI/home/pay_to_koul_id/screens/previous_transactions_screen.dart';
 import 'package:koul_network/UI/home/pay_to_koul_id/widgets/textfield.dart';
 import 'package:koul_network/bloc/koul_account_bloc/koul_account_bloc/koul_account_bloc.dart';
-import 'package:koul_network/enums/route_path.dart';
-import 'package:koul_network/enums/show_phone.dart';
-import 'package:koul_network/helpers/search.dart';
+import 'package:koul_network/core/enums/route_path.dart';
+import 'package:koul_network/core/enums/show_phone.dart';
+import 'package:koul_network/core/helpers/search.dart';
 import 'package:koul_network/model/contact.dart';
 
 class ContactsList extends StatefulWidget {

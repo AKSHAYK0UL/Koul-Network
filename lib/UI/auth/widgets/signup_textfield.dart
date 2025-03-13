@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:bulleted_list/bulleted_list.dart';
 import 'package:koul_network/UI/auth/screens/signin.dart';
-import 'package:koul_network/helpers/helper_functions/password_checker.dart';
-import 'package:koul_network/helpers/helper_functions/show_model_sheet.dart';
-import 'package:koul_network/helpers/helper_functions/sim_info.dart';
+import 'package:koul_network/core/helpers/helper_functions/password_checker.dart';
+import 'package:koul_network/core/helpers/helper_functions/show_model_sheet.dart';
+import 'package:koul_network/core/helpers/helper_functions/sim_info.dart';
 import 'package:koul_network/model/auth_request_signup.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:simnumber/siminfo.dart';

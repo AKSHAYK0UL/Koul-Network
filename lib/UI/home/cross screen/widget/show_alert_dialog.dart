@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:koul_network/UI/home/cross%20screen/screen/transaction_pin.dart';
-import 'package:koul_network/enums/route_pay_pin.dart';
-import 'package:koul_network/helpers/auth_bio_pin.dart';
+import 'package:koul_network/core/enums/route_pay_pin.dart';
+import 'package:koul_network/core/helpers/auth_bio_pin.dart';
 
 showAlertDialog(
     {required BuildContext context,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:koul_network/UI/home/more/widget/user_info.dart';
-import 'package:koul_network/singleton/currentuser.dart';
+import 'package:koul_network/core/singleton/currentuser.dart';
 import 'package:lottie/lottie.dart';
 
 class AccountInfo extends StatefulWidget {

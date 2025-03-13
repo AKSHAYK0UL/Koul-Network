@@ -4,13 +4,13 @@ import 'package:hive/hive.dart';
 import 'package:koul_network/UI/home/pay_to_koul_id/screens/pay_screen.dart';
 import 'package:koul_network/UI/home/pay_to_koul_id/widgets/previous_transaction.dart';
 import 'package:koul_network/bloc/koul_account_bloc/koul_account_bloc/koul_account_bloc.dart';
-import 'package:koul_network/enums/route_path.dart';
-import 'package:koul_network/enums/show_phone.dart';
-import 'package:koul_network/helpers/helper_functions/currentuser_koulaccount/getcurrentuser_koulaccount.dart';
-import 'package:koul_network/helpers/helper_functions/phone_formatter.dart';
-import 'package:koul_network/helpers/utc_to_ist.dart';
+import 'package:koul_network/core/enums/route_path.dart';
+import 'package:koul_network/core/enums/show_phone.dart';
+import 'package:koul_network/core/helpers/helper_functions/currentuser_koulaccount/getcurrentuser_koulaccount.dart';
+import 'package:koul_network/core/helpers/helper_functions/phone_formatter.dart';
+import 'package:koul_network/core/helpers/utc_to_ist.dart';
 import 'package:koul_network/model/contact.dart';
-import 'package:koul_network/singleton/currentuser.dart';
+import 'package:koul_network/core/singleton/currentuser.dart';
 
 class PreviousTransactionsScreen extends StatefulWidget {
   static const routeName = "PreviousTransactionsScreen";

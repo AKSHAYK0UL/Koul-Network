@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:koul_network/UI/home/pay_to_koul_id/screens/previous_transactions_screen.dart';
 import 'package:koul_network/bloc/koul_account_bloc/koul_account_bloc/koul_account_bloc.dart';
-import 'package:koul_network/helpers/auth_bio_pin.dart';
-import 'package:koul_network/helpers/helper_functions/currentuser_koulaccount/getcurrentuser_koulaccount.dart';
-import 'package:koul_network/singleton/currentuser.dart';
+import 'package:koul_network/core/helpers/auth_bio_pin.dart';
+import 'package:koul_network/core/helpers/helper_functions/currentuser_koulaccount/getcurrentuser_koulaccount.dart';
+import 'package:koul_network/core/singleton/currentuser.dart';
 import 'package:lottie/lottie.dart';
 
 class TransactionFailedScreen extends StatelessWidget {

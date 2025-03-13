@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:koul_network/UI/home/more/screen/AppPinkeypad.dart';
 import 'package:koul_network/UI/home/more/widget/build_tiles.dart';
-import 'package:koul_network/enums/app_pin_settting.dart';
-import 'package:koul_network/singleton/currentuser.dart';
+import 'package:koul_network/core/enums/app_pin_settting.dart';
+import 'package:koul_network/core/singleton/currentuser.dart';
 
 class AppPinSetting extends StatelessWidget {
   static const routeName = "apppinsetting";

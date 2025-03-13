@@ -5,7 +5,7 @@ import 'package:koul_network/bloc/koul_account_bloc/koul_account_bloc/koul_accou
 import 'package:koul_network/bloc/stripe_bloc/bloc/stripe_bloc.dart';
 import 'package:koul_network/model/koul_account/from_to.dart';
 import 'package:koul_network/model/koul_account/transaction.dart';
-import 'package:koul_network/singleton/currentuser.dart';
+import 'package:koul_network/core/singleton/currentuser.dart';
 import 'package:lottie/lottie.dart';
 
 class FundAddedSuccess extends StatefulWidget {

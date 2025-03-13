@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:koul_network/UI/add_fund/screen/fund_transfer.dart';
 import 'package:koul_network/UI/home/more/widget/user_info.dart';
 import 'package:koul_network/bloc/stripe_bloc/bloc/stripe_bloc.dart';
-import 'package:koul_network/helpers/helper_functions/phone_formatter.dart';
+import 'package:koul_network/core/helpers/helper_functions/phone_formatter.dart';
 import 'package:koul_network/model/koul_account/from_to.dart';
 import 'package:lottie/lottie.dart';
 

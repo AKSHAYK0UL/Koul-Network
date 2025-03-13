@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:koul_network/UI/home/screens/home_screen.dart';
 import 'package:koul_network/bloc/auth_bloc/auth_bloc.dart';
-import 'package:koul_network/enums/app_pin_settting.dart';
-import 'package:koul_network/helpers/helper_functions/logout/logout_func.dart';
-import 'package:koul_network/singleton/currentuser.dart';
+import 'package:koul_network/core/enums/app_pin_settting.dart';
+import 'package:koul_network/core/helpers/helper_functions/logout/logout_func.dart';
+import 'package:koul_network/core/singleton/currentuser.dart';
 import 'package:lottie/lottie.dart';
 
 class Loading extends StatefulWidget {

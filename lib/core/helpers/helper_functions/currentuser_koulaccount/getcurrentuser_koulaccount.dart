@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:koul_network/model/koul_account/account_balance.dart';
 import 'package:http/http.dart' as http;
 import 'package:koul_network/secrets/api.dart';
-import 'package:koul_network/singleton/currentuser.dart';
-import 'package:koul_network/singleton/currentuser_account.dart';
+import 'package:koul_network/core/singleton/currentuser.dart';
+import 'package:koul_network/core/singleton/currentuser_account.dart';
 
 Future<void> getCurrentuserKoulAccountDatail(String uid) async {
   final currentUser = CurrentUserSingleton.getCurrentUserInstance();

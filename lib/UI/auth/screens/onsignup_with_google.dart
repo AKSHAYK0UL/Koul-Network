@@ -5,9 +5,9 @@ import 'package:koul_network/UI/global_widget/snackbar_customwidget.dart';
 import 'package:koul_network/UI/home/screens/home_screen.dart';
 
 import 'package:koul_network/bloc/auth_bloc/auth_bloc.dart';
-import 'package:koul_network/enums/auth_type_enum.dart';
-import 'package:koul_network/helpers/helper_functions/show_model_sheet.dart';
-import 'package:koul_network/helpers/helper_functions/sim_info.dart';
+import 'package:koul_network/core/enums/auth_type_enum.dart';
+import 'package:koul_network/core/helpers/helper_functions/show_model_sheet.dart';
+import 'package:koul_network/core/helpers/helper_functions/sim_info.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:simnumber/siminfo.dart';
 

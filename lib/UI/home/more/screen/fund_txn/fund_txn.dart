@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:koul_network/UI/global_widget/snackbar_customwidget.dart';
 import 'package:koul_network/UI/home/cross%20screen/transaction_detail.dart';
 import 'package:koul_network/bloc/stripe_bloc/bloc/stripe_bloc.dart';
-import 'package:koul_network/enums/show_phone.dart';
-import 'package:koul_network/helpers/utc_to_ist.dart';
+import 'package:koul_network/core/enums/show_phone.dart';
+import 'package:koul_network/core/helpers/utc_to_ist.dart';
 import 'package:koul_network/model/koul_account/transaction.dart';
-import 'package:koul_network/singleton/currentuser.dart';
+import 'package:koul_network/core/singleton/currentuser.dart';
 
 class FundTxn extends StatefulWidget {
   static const routeName = "/fundtxn";
@@ -33,7 +33,7 @@ class _FundTxnState extends State<FundTxn> {
           titleSpacing: 0,
           scrolledUnderElevation: 0,
           title: Text(
-            "Funds Transactions",
+            "Stripe Transactions",
             style: Theme.of(context).textTheme.titleMedium,
           )),
       body: BlocConsumer<StripeBloc, StripeState>(
@@ -101,9 +101,7 @@ class _FundTxnState extends State<FundTxn> {
                           splashColor: Colors.transparent,
                           title: Text(
                             fundData.to.koulId == currentUser.id
-                                ? fundData.from.name.replaceFirst(
-                                    fundData.from.name[0],
-                                    fundData.from.name[0].toUpperCase())
+                                ? "Self Transfer"
                                 : fundData.to.name.replaceFirst(
                                     fundData.to.name[0],
                                     fundData.to.name[0].toUpperCase()),

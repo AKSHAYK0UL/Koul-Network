@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:koul_network/UI/global_widget/snackbar_customwidget.dart';
 import 'package:koul_network/UI/home/pay_to_koul_id/screens/previous_transactions_screen.dart';
 import 'package:koul_network/bloc/koul_account_bloc/koul_account_bloc/koul_account_bloc.dart';
-import 'package:koul_network/enums/route_path.dart';
-import 'package:koul_network/enums/show_phone.dart';
+import 'package:koul_network/core/enums/route_path.dart';
+import 'package:koul_network/core/enums/show_phone.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class QRScanner extends StatefulWidget {

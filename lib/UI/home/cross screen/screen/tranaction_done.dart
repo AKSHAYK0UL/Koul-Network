@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:koul_network/UI/home/cross%20screen/widget/transaction_detail.dart';
 import 'package:koul_network/UI/home/pay_to_koul_id/screens/previous_transactions_screen.dart';
 import 'package:koul_network/bloc/koul_account_bloc/koul_account_bloc/koul_account_bloc.dart';
-import 'package:koul_network/helpers/helper_functions/currentuser_koulaccount/getcurrentuser_koulaccount.dart';
-import 'package:koul_network/singleton/currentuser.dart';
+import 'package:koul_network/core/helpers/helper_functions/currentuser_koulaccount/getcurrentuser_koulaccount.dart';
+import 'package:koul_network/core/singleton/currentuser.dart';
 import 'package:lottie/lottie.dart';
 
 class TranactionDoneScreen extends StatefulWidget {
@@ -97,7 +97,8 @@ class _TranactionDoneScreenState extends State<TranactionDoneScreen>
                                 height: screenSize.height * 0.0264,
                               ),
                               Text(
-                                "₹${currentstate.transactionDoneData.amount.toString()}",
+                                currentstate.transactionDoneData.amount
+                                    .toStringAsFixed(2),
                                 style: TextStyle(
                                   fontSize: screenSize.height * 0.0558,
                                   fontWeight: FontWeight.normal,

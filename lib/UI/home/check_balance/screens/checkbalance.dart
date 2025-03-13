@@ -5,7 +5,7 @@ import 'package:koul_network/UI/home/check_balance/widgets/account_lowbalance_al
 import 'package:koul_network/UI/home/check_balance/widgets/alert_on_highamount.dart';
 import 'package:koul_network/UI/home/check_balance/widgets/balance_card.dart';
 import 'package:koul_network/bloc/koul_account_bloc/koul_account_bloc/koul_account_bloc.dart';
-import 'package:koul_network/singleton/currentuser.dart';
+import 'package:koul_network/core/singleton/currentuser.dart';
 
 class CheckbalanceScreen extends StatefulWidget {
   static const routeName = "CheckbalanceScreen";

@@ -4,13 +4,13 @@ import 'package:koul_network/UI/global_widget/snackbar_customwidget.dart';
 import 'package:koul_network/UI/home/cross%20screen/screen/processing_screen.dart';
 import 'package:koul_network/UI/home/pay_to_koul_id/widgets/amount_textfield.dart';
 import 'package:koul_network/bloc/koul_account_bloc/koul_account_bloc/koul_account_bloc.dart';
-import 'package:koul_network/enums/show_phone.dart';
-import 'package:koul_network/helpers/helper_functions/currentuser_koulaccount/getcurrentuser_koulaccount.dart';
-import 'package:koul_network/helpers/helper_functions/phone_formatter.dart';
-import 'package:koul_network/helpers/payment/handle_payment.dart';
+import 'package:koul_network/core/enums/show_phone.dart';
+import 'package:koul_network/core/helpers/helper_functions/currentuser_koulaccount/getcurrentuser_koulaccount.dart';
+import 'package:koul_network/core/helpers/helper_functions/phone_formatter.dart';
+import 'package:koul_network/core/helpers/payment/handle_payment.dart';
 import 'package:koul_network/main.dart';
-import 'package:koul_network/singleton/currentuser.dart';
-import 'package:koul_network/singleton/currentuser_account.dart';
+import 'package:koul_network/core/singleton/currentuser.dart';
+import 'package:koul_network/core/singleton/currentuser_account.dart';
 
 class PayScreen extends StatefulWidget {
   static const routeName = "PayScreen";
