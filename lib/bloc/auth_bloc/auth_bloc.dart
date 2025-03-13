@@ -180,6 +180,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         "invalid request",
         "try another email"
       ];
+      print("RESPONSE ERROR : ${response.body}");
 
       if (!errors.contains(response.body) && response.body.isNotEmpty) {
         Map<String, dynamic> data = json.decode(response.body);
@@ -193,12 +194,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         );
         return;
       }
-      if (errors.contains(response.body)) {
-        emit(AuthFaliueState("invalid email or password"));
-        return;
-      }
+      // if (errors.contains(response.body)) {
+      //   emit(AuthFaliueState("invalid email or password"));
+      //   return;
+      // }
     } catch (_) {
-      emit(AuthFaliueState("something went wrong"));
+      // emit(AuthFaliueState("something went wrong"));
+      emit(AuthFaliueState("invalid email or password"));
+
       return;
     }
   }
