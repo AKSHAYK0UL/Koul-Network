@@ -58,6 +58,7 @@ dependencies:
   mobile_scanner: ^4.0.1
   flutter_stripe: ^10.2.0
   appcheck: ^1.5.2
+  location: ^6.0.2
 
 
 

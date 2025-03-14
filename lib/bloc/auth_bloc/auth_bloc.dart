@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:koul_network/core/enums/app_pin_settting.dart';
 import 'package:koul_network/core/enums/auth_type_enum.dart';
+import 'package:koul_network/core/helpers/helper_functions/location_ip.dart/get_location_ip.dart';
 import 'package:koul_network/core/helpers/helper_functions/trim_phno.dart';
 import 'package:koul_network/model/contact.dart';
 import 'package:koul_network/model/rverify_response.dart';
@@ -20,8 +21,8 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  // final url = "http://10.0.2.2:8000";
-  final url = AUTH_ACCOUNT_API_URL;
+  final url = "http://10.0.2.2:8000";
+  // final url = AUTH_ACCOUNT_API_URL;
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: [
       'email',
@@ -169,10 +170,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoadingState());
     try {
       final signinRoute = Uri.parse("$url/login");
+      final locationIpData = await locationIP();
       final response = await http.post(signinRoute,
           body: json.encode({
             "useremail": event.userEmail.toLowerCase(),
             "password": event.password.trim(),
+            "ipaddress": locationIpData.ipAddress,
+            "latitude": locationIpData.locationData.latitude,
+            "longitude": locationIpData.locationData.longitude,
           }));
       List<String> errors = [
         "no user found(middleware)",
@@ -198,11 +203,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       //   emit(AuthFaliueState("invalid email or password"));
       //   return;
       // }
-    } catch (_) {
+    } catch (e) {
       // emit(AuthFaliueState("something went wrong"));
-      emit(AuthFaliueState("invalid email or password"));
-
-      return;
+      if (e.toString().contains('permanently denied')) {
+        emit(AuthFaliueState("Location permission permanently denied"));
+      } else {
+        emit(AuthFaliueState(e.toString()));
+      }
     }
   }
 

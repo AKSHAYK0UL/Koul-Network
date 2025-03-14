@@ -125,7 +125,10 @@ final class SecureSignInEvent extends AuthEvent {
   final String userName;
   final String userEmail;
 
-  SecureSignInEvent({required this.userName, required this.userEmail});
+  SecureSignInEvent({
+    required this.userName,
+    required this.userEmail,
+  });
 }
 
 final class SecureSignInverifyEvent extends AuthEvent {

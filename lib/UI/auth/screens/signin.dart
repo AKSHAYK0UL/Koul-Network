@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:koul_network/UI/auth/widgets/signin_textfield.dart';
+import 'package:koul_network/UI/global_widget/open_setting_dialogbox.dart';
 import 'package:koul_network/UI/global_widget/snackbar_customwidget.dart';
 import 'package:koul_network/UI/home/screens/home_screen.dart';
 import 'package:koul_network/bloc/auth_bloc/auth_bloc.dart';
@@ -106,6 +107,14 @@ class _SignInScreenState extends State<SignInScreen>
                   ),
                   BlocListener<AuthBloc, AuthState>(
                     listener: (context, state) {
+                      if (state is AuthFaliueState &&
+                          state.error.contains("permanently denied")) {
+                        buildOpenSettingDialogBox(
+                            context: context,
+                            title: "Location Permission",
+                            content:
+                                "Location permission is permanently denied. Please open settings to enable location access.");
+                      }
                       if (state is AuthHomeState) {
                         if (state.userId.isNotEmpty &&
                             state.authToken.isNotEmpty) {
@@ -119,7 +128,8 @@ class _SignInScreenState extends State<SignInScreen>
                               HomeScreen.routeName, ((route) => false));
                         }
                       }
-                      if (state is AuthFaliueState) {
+                      if (state is AuthFaliueState &&
+                          state.error != "permanently denied") {
                         buildSnackBar(context, state.error);
                       }
                     },
