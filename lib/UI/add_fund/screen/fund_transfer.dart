@@ -134,14 +134,15 @@ class _TransferFundState extends State<TransferFund> {
             height: screenSize.height * 0.071,
             child: ElevatedButton.icon(
               onPressed: () async {
-                if (amountController.text.isEmpty ||
-                    double.tryParse(amountController.text) == null ||
-                    double.parse(amountController.text) < 1) {
+                final cleanedText = amountController.text.replaceAll(',', '');
+                final amount = double.tryParse(cleanedText);
+
+                if (cleanedText.isEmpty || amount == null || amount < 1) {
+                  print(cleanedText);
                   buildSnackBar(context, "Payment must be at least ₹1");
                 } else {
                   context.read<StripeBloc>().add(AddFundEvent(
-                      amount:
-                          (double.parse(amountController.text) * 100).toInt()));
+                      amount: (double.parse(cleanedText) * 100).toInt()));
                 }
               },
               icon: const Icon(Icons.forward),

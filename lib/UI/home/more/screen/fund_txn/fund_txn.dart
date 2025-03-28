@@ -4,6 +4,7 @@ import 'package:koul_network/UI/global_widget/snackbar_customwidget.dart';
 import 'package:koul_network/UI/home/cross%20screen/transaction_detail.dart';
 import 'package:koul_network/bloc/stripe_bloc/bloc/stripe_bloc.dart';
 import 'package:koul_network/core/enums/show_phone.dart';
+import 'package:koul_network/core/helpers/helper_functions/number_formatter.dart';
 import 'package:koul_network/core/helpers/utc_to_ist.dart';
 import 'package:koul_network/model/koul_account/transaction.dart';
 import 'package:koul_network/core/singleton/currentuser.dart';
@@ -118,8 +119,8 @@ class _FundTxnState extends State<FundTxn> {
                               fit: BoxFit.scaleDown,
                               child: Text(
                                 fundData.to.koulId == currentUser.id
-                                    ? "+ ₹${fundData.amount.toStringAsFixed(2)}"
-                                    : "₹${fundData.amount.toStringAsFixed(2)}",
+                                    ? "+ ₹${numberFormatter(fundData.amount.toString())}"
+                                    : "₹${numberFormatter(fundData.amount.toString())}",
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyMedium!

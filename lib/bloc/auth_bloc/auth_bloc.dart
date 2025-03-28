@@ -21,8 +21,8 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final url = "http://10.0.2.2:8000";
-  // final url = AUTH_ACCOUNT_API_URL;
+  //final url = "http://10.0.2.2:8000";
+  final url = AUTH_ACCOUNT_API_URL;
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: [
       'email',
@@ -247,6 +247,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             headers: {"Authorization": event.token},
             body: json.encode({"userid": event.userid})),
         http.get(wakeUpKoulServiceRoute),
+        http.get(Uri.parse(IPFS_URL))
       ]);
 
       final jsondata = jsonDecode(response[0].body);

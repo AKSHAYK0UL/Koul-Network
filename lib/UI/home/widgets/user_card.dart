@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:koul_network/UI/home/check_balance/screens/checkbalance.dart';
 import 'package:koul_network/bloc/auth_bloc/auth_bloc.dart';
 import 'package:koul_network/bloc/koul_account_bloc/koul_account_bloc/koul_account_bloc.dart';
+import 'package:koul_network/core/helpers/helper_functions/number_formatter.dart';
 import 'package:koul_network/core/helpers/helper_functions/phone_formatter.dart';
 import 'package:koul_network/core/singleton/currentuser.dart';
 
@@ -273,7 +274,7 @@ Widget buildCardBackInfo(
           height: screenSize.height * 0.0028,
         ),
         Text(
-          "₹${state.accountBalance.accountCurrentBalance.toStringAsFixed(2)}",
+          "₹${numberFormatter(state.accountBalance.accountCurrentBalance.toString())}",
           style: Theme.of(context).textTheme.headlineMedium!,
         ),
         SizedBox(

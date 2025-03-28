@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:koul_network/bloc/koul_account_bloc/koul_account_bloc/koul_account_bloc.dart';
+import 'package:koul_network/core/helpers/helper_functions/number_formatter.dart';
 import 'package:koul_network/model/koul_account/account_balance.dart';
 
 Widget buildBalanceCard(BuildContext context, AccountBalance account) {
@@ -31,7 +32,7 @@ Widget buildBalanceCard(BuildContext context, AccountBalance account) {
                   fit: BoxFit.scaleDown,
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "${account.accountCurrentBalance} ₹ ",
+                    "${numberFormatter(account.accountCurrentBalance.toString())} ₹ ",
                     style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                           fontWeight: FontWeight.bold,
                           color: Colors.white70,

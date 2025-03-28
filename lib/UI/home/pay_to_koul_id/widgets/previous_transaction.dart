@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:koul_network/UI/home/cross%20screen/transaction_detail.dart';
 import 'package:koul_network/core/enums/show_phone.dart';
+import 'package:koul_network/core/helpers/helper_functions/number_formatter.dart';
 import 'package:koul_network/core/helpers/utc_to_ist.dart';
 import 'package:koul_network/model/koul_account/transaction.dart';
 import 'package:koul_network/core/singleton/currentuser.dart';
@@ -83,7 +84,7 @@ Widget buildPreviousTranactionCard(
                       height: screenSize.height * 0.0106,
                     ),
                     Text(
-                      transactionData.amount.toStringAsFixed(2),
+                      numberFormatter(transactionData.amount.toString()),
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
                     SizedBox(

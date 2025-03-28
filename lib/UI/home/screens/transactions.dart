@@ -4,6 +4,7 @@ import 'package:koul_network/UI/home/cross%20screen/transaction_detail.dart';
 import 'package:koul_network/bloc/koul_account_bloc/koul_account_bloc/koul_account_bloc.dart';
 import 'package:koul_network/core/enums/ledgerInfo.dart';
 import 'package:koul_network/core/enums/show_phone.dart';
+import 'package:koul_network/core/helpers/helper_functions/number_formatter.dart';
 import 'package:koul_network/core/helpers/utc_to_ist.dart';
 import 'package:koul_network/core/singleton/currentuser.dart';
 
@@ -189,8 +190,8 @@ class _TransactionsState extends State<Transactions> with RouteAware {
                                 fit: BoxFit.scaleDown,
                                 child: Text(
                                   tData.transactionType == "credit"
-                                      ? "+ ₹${tData.amount.toStringAsFixed(2)}"
-                                      : "₹${tData.amount.toStringAsFixed(2)}",
+                                      ? "+ ₹${numberFormatter(tData.amount.toString())}"
+                                      : "₹${numberFormatter(tData.amount.toString())}",
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyMedium!
