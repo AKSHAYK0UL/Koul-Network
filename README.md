@@ -83,34 +83,89 @@
   </tr>
 </table>
 
-## Overview
+---
 
-KOUL NETWORK integrates advanced payment technologies to streamline digital transactions. By incorporating the Stripe Payment Gateway, all deposits are directed into one master account while individual balances are updated in real time. The app ensures security through account registration with SIM verification, and it supports multiple payment methods such as Koul ID, phone number, and QR code scanning.
+## 🧾 Overview
 
-## Key Features
+**KOUL NETWORK** is a next-generation digital payment solution built to simplify and secure everyday transactions. Designed around a central bank account model, the app uses Stripe to process deposits and updates individual balances in real time. All transactions are authenticated using SIM verification, and users can make payments through Koul ID, phone numbers, or QR codes.
 
-- **Single-Bank-Account Model:** Eliminates traditional bank transaction fees and daily transfer limits.
-- **Stripe Integration:** Funnels all deposits into one master account with real-time balance updates.
-- **High Transaction Success:** Achieved a 98.35% success rate over 800+ transactions.
-- **SIM Verification:** Processes transactions only from devices with the SIM card used during registration.
-- **Multiple Payment Methods:** Accepts payments via Koul ID, phone number, and QR code scanning.
-- **Comprehensive Ledger:** Detailed filters for credit and debit transactions with monthly insights via pie charts.
-- **AI-Generated Reports:** Provides automated financial reports for deeper account analysis.
-- **Robust Security:** Sensitive data is hashed before storage to ensure maximum protection.
+To promote transparency, **all transaction data is securely stored in a custom-built IPFS-based system**. This distributed ledger ensures **public access to transaction history** (while maintaining user anonymity), giving every user a verifiable view of the network’s transaction flow.
 
-## Tech Stack
+> ✅ **Smart contracts periodically run over the IPFS-stored data to verify the integrity and authenticity of all transaction records**, ensuring that the ledger remains trustworthy and tamper-proof.
 
-- **Frontend:** Flutter, BLoC
-- **Backend:** Golang with Gin-gonic
-- **Database:** MongoDB
-- **API:** RESTful API with JWT authentication
-- **Architecture:** Microservices Architecture
-- **Payment Gateway:** Stripe
+---
 
-## Usage
+## 🚀 Key Features
 
-KOUL NETWORK empowers users to register securely via SIM verification, make payments using various methods, and view a detailed ledger of transactions. Deposits are processed seamlessly through Stripe, and users benefit from real-time balance updates, comprehensive financial insights, and AI-generated reporting.
+- 🔁 **Centralized Bank Account Model**  
+  All user funds are processed through a single Stripe-powered master account to avoid bank charges and daily transfer limits.
 
-## Project Status
+- 💳 **Stripe Integration**  
+  Real-time deposits and balance synchronization using Stripe's robust payment infrastructure.
 
-**Note:** This project is still under development.
+- 📶 **SIM-Based Authentication**  
+  Transactions are allowed only from devices with the same SIM card used during registration, ensuring identity protection.
+
+- 🔎 **Multiple Payment Options**  
+  Send and receive money via Koul ID, phone number, or QR code for flexible and quick transactions.
+
+- 📊 **Detailed Ledger with Filters**  
+  Track transactions with filters for credit and debit, and gain monthly insights via pie charts.
+
+- 🤖 **AI-Powered Financial Reports**  
+  Automatically generated analytics to give users a deeper understanding of their spending and income trends.
+
+- 🌐 **Decentralized Transaction Storage (IPFS)**  
+  All transactions are **stored on a custom IPFS-based public ledger**, allowing transparent access to transaction history for every user, enhancing accountability while maintaining data privacy.
+
+- 🧠 **Smart Contract-Backed Verification**  
+  Smart contracts run on top of IPFS to regularly validate the accuracy and consistency of the stored data.
+
+- 🔒 **High-Level Security**  
+  All sensitive data is securely hashed before storage.
+
+- ✅ **High Transaction Success Rate**  
+  Over 800+ transactions with a 98.35% success rate.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** Flutter with BLoC for state management  
+- **Backend:** Golang using the Gin framework  
+- **Database:** MongoDB  
+- **Authentication:** JWT (JSON Web Tokens)  
+- **Payment Gateway:** Stripe  
+- **Architecture:** Microservices-based backend  
+- **Distributed Ledger:** Custom IPFS storage for public transaction logs
+
+---
+
+## 📱 How It Works
+
+1. **Register:**  
+   Users sign up with their mobile number, and the SIM card is linked for verification.
+
+2. **Deposit Funds:**  
+   Deposits go into a centralized Stripe-connected master account.
+
+3. **Make Payments:**  
+   Users can pay others through various identifiers (Koul ID, phone, QR).
+
+4. **Track Usage:**  
+   Transactions are logged and visualized through graphs and AI-generated summaries.  
+   Additionally, **all transaction records are stored in a decentralized IPFS system**, publicly accessible to anyone, ensuring transparency of financial activity without compromising user identities.
+
+5. **Data Verification via Smart Contracts:**  
+   Automated smart contracts cross-verify IPFS-stored transactions to detect any inconsistency or tampering attempts, reinforcing the integrity of the decentralized ledger.
+
+---
+
+## 📌 Project Status
+
+**Note:** This project is currently under active development. New features and optimizations are being added continuously.
+
+---
+
+
+
