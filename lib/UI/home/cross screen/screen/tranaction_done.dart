@@ -98,9 +98,7 @@ class _TranactionDoneScreenState extends State<TranactionDoneScreen>
                                 height: screenSize.height * 0.0264,
                               ),
                               Text(
-                                numberFormatter(currentstate
-                                    .transactionDoneData.amount
-                                    .toString()),
+                                "₹${numberFormatter(currentstate.transactionDoneData.amount.toString())}",
                                 style: TextStyle(
                                   fontSize: screenSize.height * 0.0558,
                                   fontWeight: FontWeight.normal,

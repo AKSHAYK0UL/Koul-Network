@@ -84,7 +84,7 @@ Widget buildPreviousTranactionCard(
                       height: screenSize.height * 0.0106,
                     ),
                     Text(
-                      numberFormatter(transactionData.amount.toString()),
+                      "₹${numberFormatter(transactionData.amount.toString())}",
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
                     SizedBox(

@@ -70,7 +70,7 @@ class TransactionDetailScreen extends StatelessWidget {
                 height: screenSize.height * 0.013,
               ),
               Text(
-                transactionData.amount.toStringAsFixed(2),
+                "₹${transactionData.amount.toStringAsFixed(2)}",
                 style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                       fontSize: screenSize.height * 0.0590,
                       fontWeight: FontWeight.w400,

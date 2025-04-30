@@ -247,7 +247,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             headers: {"Authorization": event.token},
             body: json.encode({"userid": event.userid})),
         http.get(wakeUpKoulServiceRoute),
-        http.get(Uri.parse(IPFS_URL))
+        http.get(Uri.parse(IPFS_URL)),
       ]);
 
       final jsondata = jsonDecode(response[0].body);
