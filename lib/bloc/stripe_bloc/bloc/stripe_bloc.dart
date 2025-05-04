@@ -6,7 +6,6 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import "package:http/http.dart" as http;
 import 'package:koul_network/model/fund.dart';
 import 'package:koul_network/model/payee_detail.dart';
-import 'package:koul_network/model/payees.dart';
 import 'package:koul_network/secrets/api.dart';
 import 'package:koul_network/core/singleton/currentuser.dart';
 
@@ -126,9 +125,9 @@ class StripeBloc extends Bloc<StripeEvent, StripeState> {
         body: json.encode(
           {
             "userid": currentUser.id,
-            "koul_id": event.payee.koulId,
-            "account_holder_email": event.payee.email,
-            "account_holder_name": event.payee.name,
+            "koul_id": event.payeeKoulId,
+            // "account_holder_email": event.payee.email,
+            // "account_holder_name": event.payee.name,
           },
         ),
       );

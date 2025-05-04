@@ -9,7 +9,7 @@ import 'package:koul_network/core/enums/auth_type_enum.dart';
 import 'package:koul_network/core/helpers/helper_functions/show_model_sheet.dart';
 import 'package:koul_network/core/helpers/helper_functions/sim_info.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:simnumber/siminfo.dart';
+import 'package:sim_card_info/sim_info.dart';
 
 class OnSignUpWithGoogle extends StatefulWidget {
   static const routeName = "OnSignUpWithGoogle";
@@ -219,7 +219,7 @@ class _OnSignUpWithGoogleState extends State<OnSignUpWithGoogle>
                         PermissionStatus phone = await Permission.phone.status;
                         if (!context.mounted) return;
                         if (phone.isPermanentlyDenied) {
-                          List<SimCard> siminfo = [];
+                          List<SimInfo> siminfo = [];
                           buildGoogleSignUpBottomSheet(context, siminfo);
                           return;
                         }

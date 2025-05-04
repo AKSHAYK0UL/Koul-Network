@@ -19,9 +19,9 @@ final class PaymentSheetEvent extends StripeEvent {
 final class ProcessPaymentStateEvent extends StripeEvent {}
 
 final class PayeesDetailEvent extends StripeEvent {
-  final Payees payee;
+  final String payeeKoulId;
 
-  PayeesDetailEvent({required this.payee});
+  PayeesDetailEvent({required this.payeeKoulId});
 }
 
 final class GetFundsTXNList extends StripeEvent {}

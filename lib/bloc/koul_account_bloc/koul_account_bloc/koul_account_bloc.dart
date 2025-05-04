@@ -18,7 +18,7 @@ import 'package:koul_network/model/koul_account/koulid.dart';
 import 'package:koul_network/model/koul_account/transaction.dart';
 import 'package:koul_network/secrets/api.dart';
 import 'package:koul_network/core/singleton/currentuser.dart';
-import 'package:simnumber/siminfo.dart';
+import 'package:sim_card_info/sim_info.dart';
 part 'koul_account_event.dart';
 part 'koul_account_state.dart';
 
@@ -124,9 +124,10 @@ class KoulAccountBloc extends Bloc<KoulAccountEvent, KoulAccountState> {
     emit(PayToKoulIdLoadingState());
 
     try {
-      final List<SimCard> simCardNumber = await getSimCardsData(event.contex);
+      final List<SimInfo> simCardNumber = await getSimCardsData(event.contex);
+
       final List<String> Phones =
-          simCardNumber.map((e) => trimPhone(e.phoneNumber ??= "")).toList();
+          simCardNumber.map((e) => trimPhone(e.number)).toList();
       print("SIM CARD DATA ${Phones}");
       final getPhone = Phones.firstWhere((pno) => pno == currentUser.phone);
       if (getPhone.isEmpty) {
@@ -249,9 +250,13 @@ class KoulAccountBloc extends Bloc<KoulAccountEvent, KoulAccountState> {
     emit(LoadingState());
 
     try {
-      final List<SimCard> simCardNumber = await getSimCardsData(event.context);
+      // final List<SimCard> simCardNumber = await getSimCardsData(event.context);
+      // final List<String> Phones =
+      //     simCardNumber.map((e) => trimPhone(e.phoneNumber ??= "")).toList();
+      final List<SimInfo> simCardNumber = await getSimCardsData(event.context);
+
       final List<String> Phones =
-          simCardNumber.map((e) => trimPhone(e.phoneNumber ??= "")).toList();
+          simCardNumber.map((e) => trimPhone(e.number)).toList();
       final getPhone = Phones.firstWhere((pno) => pno == currentUser.phone);
       if (getPhone.isEmpty) {
         emit(FailureState("Invalid Phone number"));

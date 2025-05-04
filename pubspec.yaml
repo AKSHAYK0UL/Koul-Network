@@ -45,7 +45,7 @@ dependencies:
   google_sign_in: ^6.2.1
   custom_navigation_bar: ^0.8.2
   intl: ^0.19.0
-  simnumber: ^0.0.12
+  # simnumber: ^0.0.12
   permission_handler: ^11.3.1
   lottie: ^3.1.3
   currency_textfield: ^4.12.0
@@ -59,6 +59,7 @@ dependencies:
   flutter_stripe: ^10.2.0
   appcheck: ^1.5.2
   location: ^6.0.2
+  sim_card_info: ^1.0.2
 
 
 

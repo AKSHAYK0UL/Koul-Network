@@ -6,7 +6,7 @@ import 'package:koul_network/core/helpers/helper_functions/show_model_sheet.dart
 import 'package:koul_network/core/helpers/helper_functions/sim_info.dart';
 import 'package:koul_network/model/auth_request_signup.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:simnumber/siminfo.dart';
+import 'package:sim_card_info/sim_info.dart';
 
 final _formkey = GlobalKey<FormState>();
 String passwordValue = "";
@@ -21,7 +21,7 @@ void _onSignUpPressed(BuildContext context, SignUpClass authObject) async {
   PermissionStatus phone = await Permission.phone.status;
   if (!context.mounted) return;
   if (phone.isPermanentlyDenied) {
-    List<SimCard> siminfo = [];
+    List<SimInfo> siminfo = [];
     buildBottomSheet(context, authObject, siminfo, "email");
     return;
   }

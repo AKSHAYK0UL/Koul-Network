@@ -2,18 +2,18 @@ import 'package:bulleted_list/bulleted_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:koul_network/bloc/auth_bloc/auth_bloc.dart';
+import 'package:koul_network/core/helpers/helper_functions/trim_phno.dart';
 import 'package:koul_network/model/auth_request_signup.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:permission_handler/permission_handler.dart';
-
-import 'package:simnumber/siminfo.dart';
+import 'package:sim_card_info/sim_info.dart';
 
 // ignore: must_be_immutable
 class BuildBottomSheet extends StatefulWidget {
   final String screenRoute;
   final SignUpClass authobj;
 
-  List<SimCard> simInfo;
+  List<SimInfo> simInfo;
   BuildBottomSheet(this.authobj, this.simInfo, this.screenRoute, {super.key});
 
   @override
@@ -21,7 +21,7 @@ class BuildBottomSheet extends StatefulWidget {
 }
 
 class _BuildBottomSheetState extends State<BuildBottomSheet> {
-  List<SimCard> simCardInfo = [];
+  List<SimInfo> simCardInfo = [];
   List<String> steps = [
     "Tap on Open Setting.",
     "Select Permissions.",
@@ -64,7 +64,7 @@ class _BuildBottomSheetState extends State<BuildBottomSheet> {
     setState(() {
       simCardInfo = widget.simInfo;
       if (simCardInfo.isNotEmpty) {
-        groupvalue = simCardInfo[0].phoneNumber;
+        groupvalue = simCardInfo[0].number;
       }
     });
   }
@@ -185,17 +185,17 @@ class _BuildBottomSheetState extends State<BuildBottomSheet> {
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: screenSize.width * 0.010,
                                   vertical: 0),
-                              title: Text(simData.carrierName!,
+                              title: Text(simData.carrierName,
                                   style:
                                       Theme.of(context).textTheme.titleMedium),
-                              subtitle: Text(simData.phoneNumber!,
+                              subtitle: Text(trimPhone(simData.number),
                                   style:
                                       Theme.of(context).textTheme.titleSmall),
                               trailing: Radio(
                                 fillColor: WidgetStateProperty.resolveWith(
                                   (states) => Colors.white,
                                 ),
-                                value: simData.phoneNumber!,
+                                value: simData.number,
                                 groupValue: groupvalue,
                                 onChanged: (value) {
                                   setState(() {
@@ -205,7 +205,7 @@ class _BuildBottomSheetState extends State<BuildBottomSheet> {
                               ),
                               onTap: () {
                                 setState(() {
-                                  groupvalue = simData.phoneNumber!;
+                                  groupvalue = simData.number;
                                 });
                               },
                             );

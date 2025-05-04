@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:koul_network/UI/auth/widgets/bottom_sheet_googlesignup.dart';
 import 'package:koul_network/UI/auth/widgets/widget_for_model_sheet.dart';
 import 'package:koul_network/model/auth_request_signup.dart';
-import 'package:simnumber/siminfo.dart';
+import 'package:sim_card_info/sim_info.dart';
 
 void buildBottomSheet(BuildContext context, SignUpClass authobj,
-    List<SimCard> simInfo, String screenRoute) {
+    List<SimInfo> simInfo, String screenRoute) {
   showModalBottomSheet(
       context: context,
       builder: (context) {
@@ -13,7 +13,7 @@ void buildBottomSheet(BuildContext context, SignUpClass authobj,
       });
 }
 
-void buildGoogleSignUpBottomSheet(BuildContext context, List<SimCard> simInfo) {
+void buildGoogleSignUpBottomSheet(BuildContext context, List<SimInfo> simInfo) {
   showModalBottomSheet(
       context: context,
       builder: (context) {
