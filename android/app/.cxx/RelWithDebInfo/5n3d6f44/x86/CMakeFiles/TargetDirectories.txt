@@ -1,0 +1,2 @@
+E:/app_dev/koul network/koul_network/android/app/.cxx/RelWithDebInfo/5n3d6f44/x86/CMakeFiles/edit_cache.dir
+E:/app_dev/koul network/koul_network/android/app/.cxx/RelWithDebInfo/5n3d6f44/x86/CMakeFiles/rebuild_cache.dir

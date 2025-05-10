@@ -60,6 +60,9 @@ dependencies:
   appcheck: ^1.5.2
   location: ^6.0.2
   sim_card_info: ^1.0.2
+  flutter_windowmanager_plus: ^1.0.1
+  screenshot: ^3.0.0
+  image_gallery_saver_plus: ^4.0.1
 
 
 

@@ -5,7 +5,7 @@ import 'package:koul_network/UI/global_widget/snackbar_customwidget.dart';
 import 'package:sim_card_info/sim_card_info.dart';
 import 'package:sim_card_info/sim_info.dart';
 
-//move from abc package to xyz
+//move from simnumber package to sim_card_info
 Future<List<SimInfo>> getSimCardsData(BuildContext context) async {
   final simCardInfoPlugin = SimCardInfo();
 

@@ -1,14 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_windowmanager_plus/flutter_windowmanager_plus.dart';
 import 'package:koul_network/UI/home/cross%20screen/widget/transaction_detail.dart';
 import 'package:koul_network/core/enums/show_phone.dart';
 import 'package:koul_network/core/helpers/helper_functions/phone_formatter.dart';
 import 'package:koul_network/core/helpers/utc_to_ist.dart';
 import 'package:koul_network/model/koul_account/transaction.dart';
 import 'package:koul_network/core/singleton/currentuser.dart';
+import 'package:screenshot/screenshot.dart';
 
-class TransactionDetailScreen extends StatelessWidget {
+class TransactionDetailScreen extends StatefulWidget {
   static const routeName = "TransactionDetailScreen";
   const TransactionDetailScreen({super.key});
+
+  @override
+  State<TransactionDetailScreen> createState() =>
+      _TransactionDetailScreenState();
+}
+
+class _TransactionDetailScreenState extends State<TransactionDetailScreen> {
+  ScreenshotController screenshotController = ScreenshotController();
+
+  @override
+  void initState() {
+    FlutterWindowManagerPlus.addFlags(FlutterWindowManagerPlus.FLAG_SECURE);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    FlutterWindowManagerPlus.clearFlags(FlutterWindowManagerPlus.FLAG_SECURE);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,94 +52,98 @@ class TransactionDetailScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Center(
-          child: Column(
-            children: [
-              SizedBox(
-                height: screenSize.height * 0.013,
-              ),
-              CircleAvatar(
-                radius: screenSize.height * 0.0364,
-                backgroundColor: const Color.fromARGB(135, 15, 14, 14),
-                child: Text(
+          child: Screenshot(
+            controller: screenshotController,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: screenSize.height * 0.013,
+                ),
+                CircleAvatar(
+                  radius: screenSize.height * 0.0364,
+                  backgroundColor: const Color.fromARGB(135, 15, 14, 14),
+                  child: Text(
+                    transactionData.from.name == currentuser
+                        ? transactionData.to.name[0].toUpperCase()
+                        : transactionData.from.name[0].toUpperCase(),
+                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                ),
+                Text(
                   transactionData.from.name == currentuser
-                      ? transactionData.to.name[0].toUpperCase()
-                      : transactionData.from.name[0].toUpperCase(),
+                      ? "To ${transactionData.to.name.replaceFirst(
+                          transactionData.to.name[0],
+                          transactionData.to.name[0].toUpperCase(),
+                        )}"
+                      : "From ${transactionData.from.name.replaceFirst(
+                          transactionData.from.name[0],
+                          transactionData.from.name[0].toUpperCase(),
+                        )}",
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                if (phoneNoVisibility != ShowPhone.phoneEmpty)
+                  Text(
+                    phoneNoVisibility == ShowPhone.phoneNotVisible
+                        ? formatPhoneNumber(phone)
+                        : phone,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                SizedBox(
+                  height: screenSize.height * 0.013,
+                ),
+                Text(
+                  "₹${transactionData.amount.toStringAsFixed(2)}",
                   style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                        fontWeight: FontWeight.bold,
+                        fontSize: screenSize.height * 0.0590,
+                        fontWeight: FontWeight.w400,
                       ),
                 ),
-              ),
-              Text(
-                transactionData.from.name == currentuser
-                    ? "To ${transactionData.to.name.replaceFirst(
-                        transactionData.to.name[0],
-                        transactionData.to.name[0].toUpperCase(),
-                      )}"
-                    : "From ${transactionData.from.name.replaceFirst(
-                        transactionData.from.name[0],
-                        transactionData.from.name[0].toUpperCase(),
-                      )}",
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              if (phoneNoVisibility != ShowPhone.phoneEmpty)
-                Text(
-                  phoneNoVisibility == ShowPhone.phoneNotVisible
-                      ? formatPhoneNumber(phone)
-                      : phone,
-                  style: Theme.of(context).textTheme.bodyMedium,
+                SizedBox(
+                  height: screenSize.height * 0.013,
                 ),
-              SizedBox(
-                height: screenSize.height * 0.013,
-              ),
-              Text(
-                "₹${transactionData.amount.toStringAsFixed(2)}",
-                style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                      fontSize: screenSize.height * 0.0590,
-                      fontWeight: FontWeight.w400,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.check_circle,
+                      color: Colors.greenAccent.shade700,
+                      size: screenSize.height * 0.026,
                     ),
-              ),
-              SizedBox(
-                height: screenSize.height * 0.013,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.check_circle,
-                    color: Colors.greenAccent.shade700,
-                    size: screenSize.height * 0.026,
-                  ),
-                  Text(
-                    " Completed",
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: screenSize.height * 0.00325,
-              ),
-              Divider(
-                thickness: 0.3,
-                endIndent: screenSize.height * 0.104,
-                indent: screenSize.height * 0.104,
-              ),
-              SizedBox(
-                height: screenSize.height * 0.00325,
-              ),
-              Text(
-                timeFormaterFull(
-                  transactionData.date.toString(),
+                    Text(
+                      " Completed",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ],
                 ),
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-              buildTransactionDetailBox(
-                context: context,
-                transactionData: transactionData,
-                rightButtonText: "Repot",
-                rightButtonFun: () {},
-                rightButtonIcon: Icons.report,
-              ),
-            ],
+                SizedBox(
+                  height: screenSize.height * 0.00325,
+                ),
+                Divider(
+                  thickness: 0.3,
+                  endIndent: screenSize.height * 0.104,
+                  indent: screenSize.height * 0.104,
+                ),
+                SizedBox(
+                  height: screenSize.height * 0.00325,
+                ),
+                Text(
+                  timeFormaterFull(
+                    transactionData.date.toString(),
+                  ),
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                buildTransactionDetailBox(
+                  context: context,
+                  screenShotController: screenshotController,
+                  transactionData: transactionData,
+                  rightButtonText: "Repot",
+                  rightButtonFun: () {},
+                  rightButtonIcon: Icons.report,
+                ),
+              ],
+            ),
           ),
         ),
       ),

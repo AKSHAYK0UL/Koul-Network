@@ -15,6 +15,7 @@ import 'package:koul_network/core/theme/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   Stripe.publishableKey = PUBLISHABLE_KEY;
 
   await Hive.initFlutter();

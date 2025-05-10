@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:koul_network/model/koul_account/transaction.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:screenshot/screenshot.dart';
 
 Widget buildTransactionDetailBox({
   required BuildContext context,
@@ -7,6 +10,7 @@ Widget buildTransactionDetailBox({
   required Function() rightButtonFun,
   required String rightButtonText,
   required IconData rightButtonIcon,
+  ScreenshotController? screenShotController,
 }) {
   final screenSize = MediaQuery.sizeOf(context);
   return Container(
@@ -71,7 +75,15 @@ Widget buildTransactionDetailBox({
                 height: screenSize.height * 0.0585,
                 width: screenSize.height * 0.210,
                 child: TextButton.icon(
-                  onPressed: () {},
+                  onPressed: () async {
+                    //TODO: just the demo
+                    await [Permission.storage].request();
+                    final uintImage = await screenShotController!.capture();
+                    final time = DateTime.now();
+                    final name = "koul_network_screenshot+$time";
+                    await ImageGallerySaverPlus.saveImage(uintImage!,
+                        name: name);
+                  },
                   style: TextButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 66, 66, 66),
                   ),
